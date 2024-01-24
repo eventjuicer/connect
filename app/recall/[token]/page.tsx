@@ -14,12 +14,13 @@ export default function Home(props) {
 
 
 <BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
-<BigTextButton />
-<BigTextButton />
-<BigTextButton />
-<BigTextButton />
-<BigTextButton />
-<BigTextButton />
+<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
+<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
+<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
+<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
+<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
+<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
+
 
 
 </div>
