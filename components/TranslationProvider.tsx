@@ -4,7 +4,7 @@ import React from 'react';
 import Polyglot from 'node-polyglot';
 
 type TranslationProviderInput = {
-  translations: {};
+  translations: any;
   children: React.ReactNode;
   locale: string;
 }

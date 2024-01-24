@@ -1,7 +1,7 @@
 import Image from "next/image";
 import ThemeToggler from '@/components/ThemeToggler'
 import BigTextButton from "@/components/BigTextButton";
-export default function Home(props) {
+export default function Home(props: any) {
 
   console.log(props)
 
