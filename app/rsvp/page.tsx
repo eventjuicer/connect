@@ -1,13 +1,8 @@
 import Image from "next/image";
 import ThemeToggler from '@/components/ThemeToggler'
 import BigTextButton from "@/components/BigTextButton";
-
-export default function  Home() {
-
-
+export default function Home() {
   return (
-
-
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
 
 
@@ -27,6 +22,9 @@ export default function  Home() {
 
 
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+
+
+      <BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
 
 
         <ThemeToggler />
@@ -68,7 +66,5 @@ export default function  Home() {
 
      
     </main>
-
-
   );
 }
