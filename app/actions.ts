@@ -2,7 +2,7 @@
  
 import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
-import {  sendSparkPostEmail } from '@/lib/sparkpost'
+import { sendSparkPostEmail } from '@/lib/sparkpost'
 
 export  async function action() {
   revalidateTag('collection')
