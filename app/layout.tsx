@@ -26,6 +26,8 @@ export default  async function RootLayout({
 
   const locale = cookies().get("NEXT_LOCALE")?.value || `${process.env.NEXT_PUBLIC_DEFAULT_LOCALE}`
 
+  const translations = await loadTranslations()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={
@@ -33,21 +35,21 @@ export default  async function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )
-      }>
-        
+      }> 
         <ThemeProvider
             attribute="class"
             defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
-
-<TranslationProvider translations={await loadTranslations() } locale={locale}>
-
-            {children}
-</TranslationProvider>
-          </ThemeProvider>
-          </body>
+          <TranslationProvider 
+              translations={ translations } 
+              locale={ locale }
+            >
+            { children }
+          </TranslationProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

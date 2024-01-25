@@ -1,6 +1,6 @@
 import Image from "next/image";
 import ThemeToggler from '@/components/ThemeToggler'
-import BigTextButton from "@/components/BigTextButton";
+import TopMenu from "@/components/TopMenu";
 
 export default function  Home() {
 
@@ -11,20 +11,7 @@ export default function  Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
 
 
-<div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-
-
-<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
-<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
-<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
-<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
-<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
-<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
-<BigTextButton label="test" secondaryLabel="xxx yyy zzz"/>
-
-
-
-</div>
+      <TopMenu />
 
 
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
