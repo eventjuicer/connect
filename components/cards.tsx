@@ -24,7 +24,7 @@ import {
 }: StdCardType){
 
     return (
-        <Card className='lg:min-w-500'>
+        <Card className='min-w-30'>
         <CardHeader>
         {label? <CardTitle>{label}</CardTitle>: null}
         {secondaryLabel? <CardDescription>{secondaryLabel}</CardDescription>: null }
