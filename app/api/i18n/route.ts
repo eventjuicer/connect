@@ -8,8 +8,8 @@ export async function GET( ) {
         revalidate: 3600
        }, 
     })
+
     const data = await res.json()
 
-   
     return Response.json(data)
   }
