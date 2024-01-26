@@ -1,7 +1,10 @@
+"use server"
+
+
 import ModeToggler from "@/components/theme"
 import Image from 'next/image'
 
-export function TopBar(){
+export async function TopBar(){
 
 
 

@@ -4,7 +4,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/providers/ThemeProvider"
 import TranslationProvider from "@/providers/TranslationProvider";
-import SettingsProvider from "@/providers/SettingsProvider"
 import {loadTranslations} from "@/lib/datasources";
 import {cookies} from 'next/headers'
 import { TopBar } from "@/components/topbar";
@@ -44,7 +43,7 @@ export default  async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-          <SettingsProvider settings={settings}> 
+           
           <TranslationProvider 
               translations={ translations } 
               locale={ locale }
@@ -60,7 +59,7 @@ export default  async function RootLayout({
 
           
           </TranslationProvider>
-          </SettingsProvider>
+    
         </ThemeProvider>
       </body>
     </html>

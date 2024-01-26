@@ -2,13 +2,13 @@
 
 import {BigTextButton} from "@/components/buttons";
 import { usePathname } from "next/navigation";
-import { useSettings } from "@/lib/contexts";
+import { getSettings } from "@/lib/settings";
 
 
 export function TopMenu(){
 
     const path = usePathname()
-    const items = useSettings("topmenu", [])
+    const items = getSettings("topmenu", [])
 
 
     return (
