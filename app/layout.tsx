@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/providers/ThemeProvider"
 import TranslationProvider from "@/providers/TranslationProvider";
 import SettingsProvider from "@/providers/SettingsProvider"
-import {loadTranslations} from "@/lib/fetches";
+import {loadTranslations} from "@/lib/datasources";
 import {cookies} from 'next/headers'
 import { TopBar } from "@/components/topbar";
 import settings from '@/settings.mjs'
@@ -50,7 +50,7 @@ export default  async function RootLayout({
               locale={ locale }
             >
 
-<div className="flex min-h-screen flex-col items-center justify-between p-24">
+<div className="flex min-h-screen flex-col items-center justify-between p-8">
 <TopBar />
 <main className="flex min-h-screen flex-col items-center justify-between p-24">{ children }
 </main>

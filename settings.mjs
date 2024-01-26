@@ -21,6 +21,13 @@ const settings = {
             secondaryLabel: "zzzz",
             href: "/profile"
         },
+
+
+        {
+            label: "exhibitors",
+            secondaryLabel: "zzzz",
+            href: "/expo"
+        },
     ]
 
 
