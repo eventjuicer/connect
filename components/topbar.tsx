@@ -1,4 +1,4 @@
-import ThemeToggler from "./ThemeToggler"
+import ModeToggler from "@/components/theme"
 import Image from 'next/image'
 
 export function TopBar(){
@@ -31,7 +31,7 @@ export function TopBar(){
           </a>
         </div>
 
-        <ThemeToggler />
+        <ModeToggler />
 
       </div>
     )
