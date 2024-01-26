@@ -20,7 +20,11 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import { Input } from './ui/input'
+import {TranslatableSelect} from '@/components/selects'
+
+import { Input } from '@/components/ui/input'
+
+
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -47,7 +51,7 @@ interface DataTableProps<TData, TValue> {
    
     return (
       <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 gap-4">
         <Input
           placeholder="Filter emails..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -56,6 +60,20 @@ interface DataTableProps<TData, TValue> {
           }
           className="max-w-sm"
         />
+
+      <TranslatableSelect items={[
+         {label: "a", value: "hhh"},
+        {label: "a", value: "a"},
+        {label: "b", value: "b"},
+        {label: "c", value: "c"},
+        {label: "d", value: "d"},
+        ]}
+        onValueChange={
+          (v) =>
+            table.getColumn("amount")?.setFilterValue(v)
+        }
+        />
+
       </div>
 
       <div className="rounded-md border">

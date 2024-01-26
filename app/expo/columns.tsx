@@ -4,15 +4,26 @@ import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-
+import {TranslatedBadge} from '@/components/badges'
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Exhibitor = {
-    id: string
-    amount: number
-    slug: string
-    email: string
+
+type ExhibitorProfile = {
+    name: string;
+    tags: Array<string>;
+}
+
+type ExhibitorPurchase = {
+  formdata: {ti: string, id: string};
+}
+
+type Exhibitor = {
+    id: string;
+    amount: number;
+    slug: string;
+    profile: ExhibitorProfile;
+    instances: Array<ExhibitorPurchase>;
   }
    
 export const columns: ColumnDef<Exhibitor>[] = [
@@ -44,15 +55,40 @@ export const columns: ColumnDef<Exhibitor>[] = [
     {
       id: "name",
       accessorKey: "profile.name",
-      header: "slug",
+      header: "name",
     },
     {
-      accessorKey: "email",
-      header: "Email",
+      id: "keywords",
+      accessorKey: "profile.keywords",
+      cell: ({row}) => {
+        const tags = row.getValue("keywords")
+
+        if(!Array.isArray(tags)){
+          return null
+        }
+        return (
+          <div className="flex gap-1 flex-wrap">
+            {tags.map(label => <TranslatedBadge key={label} label={label} />) }
+          </div>
+        )
+      },
+      header: "tags",
+      filterFn: 'arrIncludesSome'
     },
     {
-      accessorKey: "amount",
-      header: "Amount",
+      id: "booths",
+      accessorFn: (row) => {
+        if(!Array.isArray(row.instances)){
+          return ""
+        }
+        return row.instances.filter(item=>item.formdata && "ti" in item.formdata).map(item => item.formdata.ti.slice(0,5)).join(", ")
+      },
+      header: "Booth",
+      cell: ({row}) => {
+        const booths = row.getValue("booths")
+        console.log(booths)
+        return booths
+      }
     },
 
     {
@@ -60,7 +96,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
         cell: ({row}) => {
             const exhibitor = row.original
             return (
-                <>
+                <div className="flex md:flex-row flex-col gap-1">
                
                 <Button variant="outline" size="icon">
                 <MoreHorizontal className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all " />
@@ -70,7 +106,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
                 <MapPin className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all " />
                 </Button>
                 
-                </>
+                </div>
             )
         }
     },
