@@ -1,6 +1,11 @@
 
 const settings = {
 
+    metadata: {
+
+        name: "E-commerce Berlin Expo"
+    },
+
 
     topmenu: [
 

@@ -1,7 +1,7 @@
 "use client"
  
 import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal } from "lucide-react"
+import { MoreHorizontal, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 
@@ -60,9 +60,17 @@ export const columns: ColumnDef<Exhibitor>[] = [
         cell: ({row}) => {
             const exhibitor = row.original
             return (
+                <>
+               
                 <Button variant="outline" size="icon">
                 <MoreHorizontal className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all " />
                 </Button>
+
+                <Button variant="outline" size="icon">
+                <MapPin className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all " />
+                </Button>
+                
+                </>
             )
         }
     },
