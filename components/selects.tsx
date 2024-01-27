@@ -30,7 +30,7 @@ export function TranslatableSelect({items, onValueChange}: TranslatableSelectPro
     <SelectContent>
 
     {items.map(item => (
-    <SelectItem value={item.value}>{item.label}</SelectItem>
+    <SelectItem key={item.label} value={item.value}>{item.label}</SelectItem>
     ))}
 
     </SelectContent>

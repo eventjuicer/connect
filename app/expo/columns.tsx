@@ -54,7 +54,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
    
     {
       id: "name",
-      accessorKey: "profile.name",
+      accessorFn: (row) => row.profile.name,
       header: "name",
     },
     {
@@ -81,7 +81,12 @@ export const columns: ColumnDef<Exhibitor>[] = [
         if(!Array.isArray(row.instances)){
           return ""
         }
-        return row.instances.filter(item=>item.formdata && "ti" in item.formdata).map(item => item.formdata.ti.slice(0,5)).join(", ")
+        return row.instances.reduce(function(prev, current){
+          console.log(prev, current)
+          return 1
+        }, "")
+        
+        // filter(item=>item.formdata && "ti" in item.formdata).map(item => item.formdata.ti.slice(0,5)).join(", ")
       },
       header: "Booth",
       cell: ({row}) => {
