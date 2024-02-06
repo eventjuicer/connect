@@ -35,7 +35,7 @@ export default async function Items({time, venue}: {time: string, venue: string}
     return null
     return <div className="m-1 w-[100px] min-h-[100px]">
 
-    {items.map(item=> <Item />)}
+    {items.map(item=> <Item key={item.id} />)}
 
    
     </div>
