@@ -1,6 +1,5 @@
 
-import {TopMenu} from "@/components/topmenus";
-
+ 
 export default function  Home() {
 
 
@@ -10,8 +9,7 @@ export default function  Home() {
     <div>
 
 
-      <TopMenu />
-  
+    
 
      
     </div>

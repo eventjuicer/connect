@@ -1,5 +1,5 @@
 
-import { ProfileForm } from "@/app/login/forms";
+import { ProfileForm } from "@/app/[lang]/login/forms";
 import { StdCard } from "@/components/cards";
 
 import { Metadata } from "next"

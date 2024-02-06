@@ -48,6 +48,13 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+
+ 
+      boxShadow: {
+          'nav': 'inset 0 -1px 0 0 rgba(0, 0, 0, 0.3)',
+      },
+      
+
       borderRadius: {
         lg: `var(--radius)`,
         md: `calc(var(--radius) - 2px)`,

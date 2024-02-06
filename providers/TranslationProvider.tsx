@@ -18,7 +18,7 @@ const TranslationProvider =  ({ translations, locale, children }: TranslationPro
   const polyglot = new Polyglot({
     locale,
     phrases: translations[locale],
-    onMissingKey: (key: string, options, locale: string) => `missing: ${key}`
+    onMissingKey: (key: string, options: any, locale: string) => `? ${key}`
   });
 
   return (
@@ -32,6 +32,8 @@ const TranslationProvider =  ({ translations, locale, children }: TranslationPro
     </TranslationProviderContext.Provider>
   );
 };
+
+
 
 
 

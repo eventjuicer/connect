@@ -18,7 +18,7 @@ export function ExhibitorDetailsDrawer(){
 
     return (
 
-        <Drawer onOpenChange={(test)=>console.log(test)}>
+        <Drawer onClose={(test)=>console.log(test)} onOpenChange={(test)=>console.log(test)} open={true}>
         <DrawerTrigger>Open</DrawerTrigger>
         <DrawerContent >
         <DrawerHeader>

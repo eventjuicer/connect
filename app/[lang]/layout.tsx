@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import {  Inter as FontSans } from "next/font/google";
-import "./globals.css";
+import "@/app/globals.css";
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/providers/ThemeProvider"
 import TranslationProvider from "@/providers/TranslationProvider";
 import {loadTranslations} from "@/lib/datasources";
 import {cookies} from 'next/headers'
-import { TopBar } from "@/components/topbar";
+import { TopBar } from "@/components/nav/topbar";
 import settings from '@/settings.mjs'
 
 const fontSans = FontSans({ 
@@ -20,20 +20,23 @@ export const metadata: Metadata = {
 };
 
 export default  async function RootLayout({
-  children
+  children, params: {lang}
 }: Readonly<{
   children: React.ReactNode;
+  params: string;
 }>) {
+
+  console.log(lang)
 
   const locale = cookies().get("NEXT_LOCALE")?.value || `${process.env.NEXT_PUBLIC_DEFAULT_LOCALE}`
 
-  const translations = await loadTranslations()
+  const translations = await loadTranslations(lang)
 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={
         cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "relative flex min-h-screen flex-col bg-background  font-sans antialiased",
           fontSans.variable
         )
       }> 
@@ -48,14 +51,15 @@ export default  async function RootLayout({
               translations={ translations } 
               locale={ locale }
             >
-
-<div className="flex min-h-screen flex-col items-center justify-between p-8">
-<TopBar />
-<main className="flex min-h-screen flex-col items-center justify-between p-24">{ children }
+ 
+<TopBar  />
+<main className="flex-1 mt-15">
+  <div className="container">
+  { children }
+  </div>
 </main>
-
-<footer>asds</footer>
-</div>
+<footer className="py-6 md:px-8 md:py-0"></footer>
+ 
 
           
           </TranslationProvider>

@@ -33,7 +33,13 @@ const settings = {
             secondaryLabel: "zzzz",
             href: "/expo"
         },
-    ]
+    ],
+
+    schedule: {
+
+        
+
+    }
 
 
 }
