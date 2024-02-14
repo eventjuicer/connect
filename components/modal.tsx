@@ -72,7 +72,7 @@ export function Modal(){
         <Drawer onClose={close} open={content}>
         {/* <DrawerTrigger>Open</DrawerTrigger> */}
         <DrawerContent >
-        <div className="mx-auto w-full max-w-sm">
+        <div className="mx-auto w-full max-w-3xl">
         <DrawerHeader>
         <DrawerTitle>{label}</DrawerTitle>
         {secondaryLabel? <DrawerDescription>{secondaryLabel}</DrawerDescription>: null}

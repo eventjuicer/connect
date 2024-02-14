@@ -27,9 +27,9 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  if (['/images/'].includes(pathname)){
-    return
-  }
+  // if (['/images/'].includes(pathname)){
+  //   return
+  // }
     
 
   // Check if there is any supported locale in the pathname
@@ -61,5 +61,5 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|images/).*)"],
 };

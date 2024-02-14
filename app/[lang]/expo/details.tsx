@@ -2,6 +2,8 @@
 
 import { useFetch } from "@/lib/fetch"
 import { get } from 'lodash'
+import {micromark} from 'micromark'
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 
 export function CompanyName({id}: {id: number}){
@@ -30,7 +32,10 @@ export function CompanyDetails({id}: {id: number}){
 
     console.log(data)
 
-    return id;
+    return <ScrollArea className="max-h-[200px] max-w-[350px] rounded-md border p-4">
+        <div dangerouslySetInnerHTML={{__html: micromark(get(data, "profile.about", ""))}}></div>
+    </ScrollArea>
+
 
 }
 
