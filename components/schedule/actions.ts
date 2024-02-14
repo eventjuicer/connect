@@ -1,14 +1,14 @@
 "use server"
 
 import { unstable_cache as cache } from "next/cache";
-import { presenters } from "@/lib/datasources"; 
+import { callPublicApi } from "@/lib/api";
 
 
 const getPresentersForSlot = cache(
 
     async (venue, time) => {
 
-        const data = await presenters()
+        const data = await callPublicApi("presenters")
         let out: Array<any> = [];
         if(data){
             out = data.filter(p => p)

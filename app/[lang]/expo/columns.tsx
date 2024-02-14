@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
 import {TranslatedBadge} from '@/components/badges'
 import { ShowDetails, ShowLocation } from "./buttons" 
-import { Details } from "./details"
+import { uniq } from "lodash"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
@@ -67,7 +67,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
         }
         return (
           <div className="flex gap-1 flex-wrap">
-            {tags.map(label => <TranslatedBadge key={label} label={label} />) }
+            { uniq(tags).map(label => <TranslatedBadge key={label} label={label} />) }
           </div>
         )
       },
@@ -102,8 +102,8 @@ export const columns: ColumnDef<Exhibitor>[] = [
             const {id} = row.original  
             return (
                 <div className="flex md:flex-row flex-col gap-1">
-                <ShowDetails id={id} details={<Details id={1} />} />
-                <ShowLocation id={id} details={<Details id={1} />} />
+                <ShowDetails id={id} />
+                <ShowLocation id={id} />
                 </div>
             )
         }

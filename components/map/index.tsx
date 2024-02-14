@@ -1,10 +1,8 @@
-import { bookingmap } from "@/lib/datasources";
-
-
+import { callPublicApi } from "@/lib/api";
 
 export async function Map(){
 
-    const data = await bookingmap()
+    const data = await callPublicApi("bookingmap")
 
     console.log(data)
 

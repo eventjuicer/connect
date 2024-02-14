@@ -1,12 +1,12 @@
 
  
-import { exhibitors } from "@/lib/datasources";
+import { callPublicApi } from "@/lib/api";
 import { DataTable } from "@/components/tables";
 import {columns} from './columns'
 
 export default async function  Home() {
 
-  const data = await exhibitors();
+  const data = await callPublicApi("exhibitors");
 
   console.log(data[0])
 

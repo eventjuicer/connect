@@ -1,6 +1,5 @@
 
  
-import { exhibitors } from "@/lib/datasources";
 import { DataTable } from "@/components/tables";
 import {columns} from './columns'
 

@@ -4,7 +4,7 @@ import "@/app/globals.css";
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/providers/ThemeProvider"
 import TranslationProvider from "@/providers/TranslationProvider";
-import { loadTranslations } from "@/lib/datasources";
+import { loadTranslations } from "@/lib/api";
 import { cookies } from 'next/headers'
 import { TopBar } from "@/components/nav/topbar";
 import settings from '@/settings.mjs'
