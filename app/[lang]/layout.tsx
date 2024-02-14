@@ -4,10 +4,12 @@ import "@/app/globals.css";
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/providers/ThemeProvider"
 import TranslationProvider from "@/providers/TranslationProvider";
-import {loadTranslations} from "@/lib/datasources";
-import {cookies} from 'next/headers'
+import { loadTranslations } from "@/lib/datasources";
+import { cookies } from 'next/headers'
 import { TopBar } from "@/components/nav/topbar";
 import settings from '@/settings.mjs'
+import { Modal } from "@/components/modal"
+
 
 const fontSans = FontSans({ 
   subsets: ["latin"],
@@ -23,14 +25,12 @@ export default  async function RootLayout({
   children, params: {lang}
 }: Readonly<{
   children: React.ReactNode;
-  params: string;
+  params: {lang: string};
 }>) {
 
-  console.log(lang)
+  const locale = cookies().get("NEXT_LOCALE")?.value || lang
 
-  const locale = cookies().get("NEXT_LOCALE")?.value || `${process.env.NEXT_PUBLIC_DEFAULT_LOCALE}`
-
-  const translations = await loadTranslations(lang)
+  const translations = await loadTranslations()
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -51,20 +51,34 @@ export default  async function RootLayout({
               translations={ translations } 
               locale={ locale }
             >
- 
+
+
 <TopBar  />
-<main className="flex-1 mt-15">
+
+
+<main className="flex-1 mt-20">
   <div className="container">
+  
   { children }
+
+ 
+
   </div>
 </main>
+
+
+
 <footer className="py-6 md:px-8 md:py-0"></footer>
  
 
-          
+
+          <Modal />
+
           </TranslationProvider>
-    
         </ThemeProvider>
+
+      
+
       </body>
     </html>
   );

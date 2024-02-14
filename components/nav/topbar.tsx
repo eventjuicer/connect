@@ -17,7 +17,7 @@ export async function TopBar(){
 
 <div className="container px-10  flex justify-between items-center">
 <Link href="/">
-<Image src="/EBE_WH.png" width={80} height={80} alt="" className="dark:invert" />
+<Image src="/images/EBE_WH.png" priority width={100} height={30} alt="" className="dark:invert" />
 </Link>
 
 

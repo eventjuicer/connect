@@ -1,11 +1,10 @@
 "use client"
  
 import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal, MapPin } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import {TranslatedBadge} from '@/components/badges'
-
+import { ShowDetails, ShowLocation } from "./buttons" 
+import { Details } from "./details"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
@@ -19,7 +18,7 @@ type ExhibitorPurchase = {
 }
 
 type Exhibitor = {
-    id: string;
+    id: number;
     amount: number;
     slug: string;
     profile: ExhibitorProfile;
@@ -82,7 +81,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
           return ""
         }
         return row.instances.reduce(function(prev, current){
-          console.log(prev, current)
+          // console.log(prev, current)
           return 1
         }, "")
         
@@ -91,7 +90,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
       header: "Booth",
       cell: ({row}) => {
         const booths = row.getValue("booths")
-        console.log(booths)
+        // console.log(booths)
         return booths
       }
     },
@@ -99,18 +98,12 @@ export const columns: ColumnDef<Exhibitor>[] = [
     {
         id: "actions",
         cell: ({row}) => {
-            const exhibitor = row.original
+
+            const {id} = row.original  
             return (
                 <div className="flex md:flex-row flex-col gap-1">
-               
-                <Button variant="outline" size="icon">
-                <MoreHorizontal className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all " />
-                </Button>
-
-                <Button variant="outline" size="icon">
-                <MapPin className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all " />
-                </Button>
-                
+                <ShowDetails id={id} details={<Details id={1} />} />
+                <ShowLocation id={id} details={<Details id={1} />} />
                 </div>
             )
         }

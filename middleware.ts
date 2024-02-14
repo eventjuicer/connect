@@ -27,10 +27,7 @@ function getLocale(request: NextRequest): string | undefined {
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  if ([
-      '/EBE_WH.png',,
-    ].includes(pathname))
-  {
+  if (['/images/'].includes(pathname)){
     return
   }
     

@@ -11,8 +11,10 @@ const schema = z.object({
 
 export async function handleTokenReminder(prevState: any, formData: FormData){
 
+    const email = formData.get('email')
+
     const validatedFields = schema.safeParse({
-      email: formData.get('email'),
+      email
       })
     
     //Return early if the form data is invalid
@@ -22,10 +24,10 @@ export async function handleTokenReminder(prevState: any, formData: FormData){
         }
     }
   
-    const user = await callServiceApi("login", {email: formData.get("email")})
+    const user = await callServiceApi("login", {email})
   
     if(user){
-      await sendEmailWithToken(formData.get("email") as string)
+      await sendEmailWithToken(email as string)
     }
   
   console.log(user)

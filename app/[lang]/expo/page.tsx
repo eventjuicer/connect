@@ -3,7 +3,6 @@
 import { exhibitors } from "@/lib/datasources";
 import { DataTable } from "@/components/tables";
 import {columns} from './columns'
-import {ExhibitorDetailsDrawer} from './drawer'
 
 export default async function  Home() {
 
@@ -18,7 +17,7 @@ export default async function  Home() {
      
   
       <DataTable columns={columns} data={data} />
-      <ExhibitorDetailsDrawer />
+     
     </div>
 
 

@@ -5,5 +5,5 @@ import {Button} from '@/components/ui/button'
 
 export function FormButton(){
     const {pending} = useFormStatus();
-    return (<Button type="submit" aria-disabled={pending}>Submit</Button>)
+    return (<Button disabled={pending} type="submit" aria-disabled={pending}>Submit</Button>)
 }
