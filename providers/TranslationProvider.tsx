@@ -9,24 +9,32 @@ type TranslationProviderInput = {
   locale: string;
 }
 
-export const TranslationProviderContext = React.createContext({ translate: key => key });
+export const TranslationProviderContext = React.createContext({});
 
 
 const TranslationProvider =  ({ translations, locale, children }: TranslationProviderInput) => {
 
 
-  const polyglot = new Polyglot({
-    locale,
-    phrases: translations[locale],
-    onMissingKey: (key: string, options: any, locale: string) => `? ${key}`
-  });
+  const value = React.useMemo(()=>{
+
+    const polyglot = new Polyglot({
+      locale,
+      phrases: translations[locale],
+      onMissingKey: (key: string) => `? ${key}`
+    });
+
+    return {
+      locale,
+      translate: polyglot.t.bind(polyglot)
+    }
+  
+
+  }, [locale, translations])
+
 
   return (
     <TranslationProviderContext.Provider
-      value={{ 
-       locale: locale, 
-        translate: polyglot.t.bind(polyglot),
-      }}
+      value={value}
     >
       {children}
     </TranslationProviderContext.Provider>

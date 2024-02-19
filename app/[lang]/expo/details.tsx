@@ -2,9 +2,9 @@
 
 import { useFetch } from "@/lib/fetch"
 import { get } from 'lodash'
-import {micromark} from 'micromark'
 import { ScrollArea } from "@/components/ui/scroll-area"
-
+import Markdown from 'react-markdown'
+import { Suspense } from "react"
 
 export function CompanyName({id}: {id: number}){
 
@@ -22,19 +22,11 @@ export function CompanyDetails({id}: {id: number}){
 
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
-    if(error){
-        return null
-    }
 
-    if(isLoading){
 
-    }
-
-    console.log(data)
-
-    return <ScrollArea className="max-h-[200px] max-w-[350px] rounded-md border p-4">
-        <div dangerouslySetInnerHTML={{__html: micromark(get(data, "profile.about", ""))}}></div>
-    </ScrollArea>
+    return <Suspense fallback={<div>asd</div>}><ScrollArea className="h-[200px] max-w-[750px] w-full rounded-md border p-4">
+        <Markdown>{get(data, "profile.about", "")}</Markdown>
+    </ScrollArea></Suspense>
 
 
 }

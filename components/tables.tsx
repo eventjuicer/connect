@@ -53,7 +53,7 @@ interface DataTableProps<TData, TValue> {
       <div>
       <div className="flex items-center py-4 gap-4">
         <Input
-          placeholder="Filter emails..."
+          placeholder="Filter names..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
@@ -61,17 +61,16 @@ interface DataTableProps<TData, TValue> {
           className="max-w-sm"
         />
 
-      <TranslatableSelect items={[
-         {label: "a", value: "hhh"},
+      <TranslatableSelect
+      label="common.tags"
+      items={[
+         {label: "logistics", value: "logistics"},
         {label: "a", value: "a"},
         {label: "b", value: "b"},
         {label: "c", value: "c"},
         {label: "d", value: "d"},
         ]}
-        onValueChange={
-          (v) =>
-            table.getColumn("amount")?.setFilterValue(v)
-        }
+        onValueChange={(v) =>table.getColumn("keywords")?.setFilterValue(v)}
         />
 
       </div>

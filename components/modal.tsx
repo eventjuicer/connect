@@ -12,7 +12,7 @@ import {
   } from "@/components/ui/drawer"
   
 import { Button } from "@/components/ui/button"
-import {get} from 'lodash'
+import {isFunction} from 'lodash'
 import { useTranslate } from "@/lib/contexts"
 import {create} from 'zustand'
 
@@ -47,10 +47,12 @@ export const useModal = create((set) => ({
       label: "",
       secondaryLabel: "",
       content: null,
+      onSubmit: null,
       setLabel: (label: string) => set(() => ({ label })),
       setSecondaryLabel: (secondaryLabel: string) => set(() => ({ secondaryLabel })),
       setContent: (content: React.ReactNode) => set(() => ({ content })),
-      close: () => set(() => ({ label:"", secondaryLabel: "", content: null })),
+      setOnSubmit: (onSubmit: ()=>void) => set(() => ({ onSubmit })),
+      close: () => set(() => ({ label:"", secondaryLabel: "", content: null, onSubmit: null }))
     }))
 
 
@@ -59,11 +61,12 @@ export function Modal(){
 
     const translate = useTranslate()
 
-    const {label, secondaryLabel, content, close} = useModal((state) => ({ 
+    const {label, secondaryLabel, content, close, onSubmit} = useModal((state) => ({ 
       label: state.label, 
       secondaryLabel: state.secondaryLabel,
       content: state.content,
-      close: state.close
+      close: state.close,
+      onSubmit: state.onSubmit
     }))
 
   
@@ -76,6 +79,12 @@ export function Modal(){
         <DrawerHeader>
         <DrawerTitle>{label}</DrawerTitle>
         {secondaryLabel? <DrawerDescription>{secondaryLabel}</DrawerDescription>: null}
+
+        {/* <DrawerClose asChild>
+              <Button variant="outline" onClick={close}>Cancel</Button>
+            </DrawerClose> */}
+
+
         </DrawerHeader>
 
         <div className="p-4 pb-0 my-10">
@@ -85,7 +94,7 @@ export function Modal(){
         </div>
 
         <DrawerFooter>
-        <Button>Submit</Button>
+            {isFunction(onSubmit)? <Button onClick={onSubmit}>Submit</Button>: null }
             <DrawerClose asChild>
               <Button variant="outline" onClick={close}>Cancel</Button>
             </DrawerClose>

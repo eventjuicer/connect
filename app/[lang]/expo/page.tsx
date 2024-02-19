@@ -1,5 +1,5 @@
 
- 
+ import { Suspense } from "react";
 import { callPublicApi } from "@/lib/api";
 import { DataTable } from "@/components/tables";
 import {columns} from './columns'
@@ -8,15 +8,15 @@ export default async function  Home() {
 
   const data = await callPublicApi("exhibitors");
 
-  console.log(data[0])
-
   return (
 
     <div>
 
      
-  
+      <Suspense fallback={<div>asd</div>}>
       <DataTable columns={columns} data={data} />
+      </Suspense>
+   
      
     </div>
 

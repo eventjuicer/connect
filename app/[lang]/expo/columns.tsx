@@ -4,13 +4,13 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
 import {TranslatedBadge} from '@/components/badges'
 import { ShowDetails, ShowLocation } from "./buttons" 
-import { uniq } from "lodash"
+import { uniq, get } from "lodash"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
 type ExhibitorProfile = {
     name: string;
-    tags: Array<string>;
+    keywords: Array<string>;
 }
 
 type ExhibitorPurchase = {
@@ -58,21 +58,19 @@ export const columns: ColumnDef<Exhibitor>[] = [
     },
     {
       id: "keywords",
-      accessorKey: "profile.keywords",
+      accessorFn: (row) => Array.isArray(get(row, "profile.keywords"))? uniq(get(row, "profile.keywords")): [],
       cell: ({row}) => {
-        const tags = row.getValue("keywords")
 
-        if(!Array.isArray(tags)){
-          return null
-        }
         return (
           <div className="flex gap-1 flex-wrap">
-            { uniq(tags).map(label => <TranslatedBadge key={label} label={label} />) }
+            { row.getValue("keywords").map(label => <TranslatedBadge key={label} label={label} />) }
           </div>
         )
       },
       header: "tags",
-      filterFn: 'arrIncludesSome'
+      filterFn: (row, id, value) => {
+        return row.getValue(id).includes(value)
+      },
     },
     {
       id: "booths",
