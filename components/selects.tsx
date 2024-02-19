@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Select,
   SelectContent,
@@ -6,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useTranslate } from "@/lib/contexts";
+import { useCallback } from "react";
 
 type TranslatableSelectCallback = (event: any) => void;
 
@@ -25,14 +28,16 @@ type TranslatableSelectProps = {
 export function TranslatableSelect({label="", baseLabel="", items, onValueChange}: TranslatableSelectProps){
 
   const translate = useTranslate()
+  const onValueChangeCallback = useCallback((val: string) => onValueChange(val), [onValueChange])
 
   return (
-    <Select onValueChange={onValueChange}>
+    <Select onValueChange={onValueChangeCallback}>
     <SelectTrigger className="w-[180px]">
     <SelectValue placeholder={translate(label)} />
     </SelectTrigger>
     <SelectContent>
 
+    <SelectItem value="none" defaultChecked>asd</SelectItem>
     {items.map(item => (
     <SelectItem key={item.label} value={item.value}>{translate(`${baseLabel}${item.label}`)}</SelectItem>
     ))}

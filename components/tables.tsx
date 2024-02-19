@@ -65,10 +65,11 @@ interface DataTableProps<TData, TValue> {
       label="common.tags"
       items={[
          {label: "logistics", value: "logistics"},
-        {label: "a", value: "a"},
-        {label: "b", value: "b"},
-        {label: "c", value: "c"},
-        {label: "d", value: "d"},
+        {label: "infrastructure", value: "infrastructure"},
+        {label: "international_sales", value: "international_sales"},
+        {label: "omnichannel", value: "omnichannel"},
+        {label: "software", value: "software"},
+        {label: "platform", value: "platform"},
         ]}
         onValueChange={(v) =>table.getColumn("keywords")?.setFilterValue(v)}
         />
