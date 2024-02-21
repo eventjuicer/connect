@@ -96,6 +96,7 @@ interface DataTableProps<TData, TValue> {
       
      
       {additionalFilters.map((filter: React.ReactElement) => React.cloneElement(filter, {
+        key: filter.props.column,
         onValueChange: (value: string) => table.getColumn(filter.props.column)?.setFilterValue(value)
       }))}
 
