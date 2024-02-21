@@ -4,7 +4,7 @@ import {get} from 'lodash'
 import settings from '@/settings.mjs'
 
 
-export const getSettings = (path = null, fallback = undefined) => {
+export const getSettings = (path: string = "", fallback: any = undefined) => {
 
     const out = get(settings, path, undefined)
 

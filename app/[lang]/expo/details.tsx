@@ -5,6 +5,10 @@ import { get } from 'lodash'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Markdown from 'react-markdown'
 import { Suspense } from "react"
+import { Skeleton } from "@/components/ui/skeleton"
+
+
+
 
 export function CompanyName({id}: {id: number}){
 
@@ -22,9 +26,9 @@ export function CompanyDetails({id}: {id: number}){
 
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
+    const cn = "h-[200px] max-w-[750px] w-full rounded-md border p-4"
 
-
-    return <Suspense fallback={<div>asd</div>}><ScrollArea className="h-[200px] max-w-[750px] w-full rounded-md border p-4">
+    return <Suspense fallback={<Skeleton className={cn} />}><ScrollArea className={cn}>
         <Markdown>{get(data, "profile.about", "")}</Markdown>
     </ScrollArea></Suspense>
 

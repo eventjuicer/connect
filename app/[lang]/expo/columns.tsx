@@ -76,11 +76,11 @@ export const columns: ColumnDef<Exhibitor>[] = [
       id: "booths",
       accessorFn: (row) => {
         if(!Array.isArray(row.instances)){
-          return ""
+          // return ""
         }
         return row.instances.reduce(function(prev, current){
-          // console.log(prev, current)
-          return 1
+          console.log(prev, current)
+          return 2
         }, "")
         
         // filter(item=>item.formdata && "ti" in item.formdata).map(item => item.formdata.ti.slice(0,5)).join(", ")

@@ -20,20 +20,23 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
-import {TranslatableSelect} from '@/components/selects'
 
 import { Input } from '@/components/ui/input'
 
 
 
 interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[]
-    data: TData[]
+    columns: ColumnDef<TData, TValue>[];
+    data: TData[];
+    searchBy?: string;
+    additionalFilters?: React.ReactElement[]
   }
    
   export function DataTable<TData, TValue>({
     columns,
     data,
+    searchBy,
+    additionalFilters
   }: DataTableProps<TData, TValue>) {
 
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
@@ -48,31 +51,27 @@ interface DataTableProps<TData, TValue> {
         columnFilters,
       },
     })
+
    
     return (
       <div>
       <div className="flex items-center py-4 gap-4">
-        <Input
+
+        {searchBy? <Input
           placeholder="Filter names..."
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          value={(table.getColumn(searchBy)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn(searchBy)?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
-        />
+        />: null}
+      
+     
+      {additionalFilters.map((filter: React.ReactElement) => React.cloneElement(filter, {
+        onValueChange: (value: string) => table.getColumn(filter.props.column)?.setFilterValue(value)
+      }))}
 
-      <TranslatableSelect
-      label="common.tags"
-      items={[
-         {label: "logistics", value: "logistics"},
-        {label: "infrastructure", value: "infrastructure"},
-        {label: "international_sales", value: "international_sales"},
-        {label: "omnichannel", value: "omnichannel"},
-        {label: "software", value: "software"},
-        {label: "platform", value: "platform"},
-        ]}
-        onValueChange={(v) =>table.getColumn("keywords")?.setFilterValue(v)}
-        />
+      
 
       </div>
 

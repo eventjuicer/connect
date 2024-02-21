@@ -3,6 +3,7 @@
 import { callPublicApi } from "@/lib/api";
 import { DataTable } from "@/components/tables";
 import {columns} from './columns'
+import { FilterByKeywords } from "./filters"
 
 export default async function  Home() {
 
@@ -14,7 +15,7 @@ export default async function  Home() {
 
      
       <Suspense fallback={<div>asd</div>}>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={data} searchBy="name" additionalFilters={ [ <FilterByKeywords column="keywords" />] } />
       </Suspense>
    
      
