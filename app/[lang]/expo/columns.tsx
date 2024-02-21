@@ -29,23 +29,42 @@ export const columns: ColumnDef<Exhibitor>[] = [
 
     {
         id: "select",
-        header: ({ table }) => (
-          <Checkbox
-            checked={
-              table.getIsAllPageRowsSelected() ||
-              (table.getIsSomePageRowsSelected() && "indeterminate")
-            }
-            onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-            aria-label="Select all"
-          />
-        ),
-        cell: ({ row }) => (
-          <Checkbox
-            checked={row.getIsSelected()}
-            onCheckedChange={(value) => row.toggleSelected(!!value)}
-            aria-label="Select row"
-          />
-        ),
+        header: ({ table }) => {
+
+          const {columnFilters} = table.getState()
+
+          if(!columnFilters.length || !table.getFilteredRowModel().rows.length){
+            return null
+          }
+
+          return (
+            <Checkbox
+              checked={
+                table.getIsAllPageRowsSelected() ||
+                (table.getIsSomePageRowsSelected() && "indeterminate")
+              }
+              onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+              aria-label="Select all"
+            />
+          )
+        },
+        cell: ({ row, table }) => {
+
+          const {columnFilters} = table.getState()
+          
+        if(!columnFilters.length){
+          return null
+        }
+
+
+          return (
+            <Checkbox
+              checked={row.getIsSelected()}
+              onCheckedChange={(value) => row.toggleSelected(!!value)}
+              aria-label="Select row"
+            />
+          )
+        },
         enableSorting: false,
         enableHiding: false,
       },
@@ -72,26 +91,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
         return row.getValue(id).includes(value)
       },
     },
-    {
-      id: "booths",
-      accessorFn: (row) => {
-        if(!Array.isArray(row.instances)){
-          // return ""
-        }
-        return row.instances.reduce(function(prev, current){
-          console.log(prev, current)
-          return 2
-        }, "")
-        
-        // filter(item=>item.formdata && "ti" in item.formdata).map(item => item.formdata.ti.slice(0,5)).join(", ")
-      },
-      header: "Booth",
-      cell: ({row}) => {
-        const booths = row.getValue("booths")
-        // console.log(booths)
-        return booths
-      }
-    },
+   
 
     {
         id: "actions",

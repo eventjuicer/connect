@@ -5,6 +5,7 @@ import React from 'react'
 import {
   ColumnDef,
   ColumnFiltersState,
+  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -40,6 +41,7 @@ interface DataTableProps<TData, TValue> {
   }: DataTableProps<TData, TValue>) {
 
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
 
     const table = useReactTable({
       data,
@@ -49,10 +51,36 @@ interface DataTableProps<TData, TValue> {
       getFilteredRowModel: getFilteredRowModel(),
       state: {
         columnFilters,
+        //columnVisibility
       },
+      //onColumnVisibilityChange: setColumnVisibility,
     })
 
    
+    /**
+     * 
+    
+    useEffect(() => {
+    if (localStorage.getItem("visibleColumnIds") === null) {
+      const columIds = table.getAllColumns().map((column) => column.id);
+      localStorage.setItem("visibleColumnIds", JSON.stringify(columIds));
+    }
+    const allHideableColumnIds = table
+      .getAllColumns()
+      .filter((column) => column.getCanHide())
+      .map((column) => column.id);
+    const savedColumnIds: string[] = JSON.parse(localStorage.getItem("visibleColumnIds") || "[]") as string[];
+    const initialColumnVisibility: VisibilityState = allHideableColumnIds.reduce((visibilityState, columnId) => {
+      visibilityState[columnId] = savedColumnIds.includes(columnId);
+      return visibilityState;
+    }, {} as VisibilityState);
+
+    setColumnVisibility(initialColumnVisibility);
+  }, []);
+
+  */
+
+
     return (
       <div>
       <div className="flex items-center py-4 gap-4">
