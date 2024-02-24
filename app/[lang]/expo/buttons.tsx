@@ -9,7 +9,7 @@ import { CompanyDetailsWithLoader, CompanyName, CompanyActions } from "./details
 function DetailsHeader({id}:{id?: number}){
 
 
-    return (<div className="flex flex-row justify-between align-middle">
+    return (<div className="flex flex-row justify-between items-center">
         <CompanyName id={id} />
         <CompanyActions id={id} />
     </div>)

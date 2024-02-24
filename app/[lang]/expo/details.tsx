@@ -50,7 +50,7 @@ export function CompanyLocation({id}: {id: number}){
 
     console.log( booths)
 
-    return <div><MapPin /></div>;
+    return <div className="flex gap-1 flow-row mr-5"><MapPin />{booths}</div>;
 
 }
 
@@ -67,7 +67,7 @@ export function CompanyActions({id}: {id: number}){
 
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
-    return (<div className="flex gap-1">
+    return (<div className="flex gap-1 flex-row items-center">
 
         <CompanyLocation id={id} />
         <IconButton icon={  <CalendarClock /> } />
@@ -118,7 +118,7 @@ export function CompanyDetails({id}: {id: number}){
     {
         label: "connect", 
         content: (
-           <CompanyLinks id={id} />
+           <div className="pt-2"><CompanyLinks id={id} /></div>
         )
     },
 

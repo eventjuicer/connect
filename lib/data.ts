@@ -10,9 +10,12 @@ type ExhbibitorInstance = {
 
 export function getBooths(arr: Array<ExhbibitorInstance>) : string {
  
-    return arr.reduce(function(next, prev){
+    return arr.reduce(function(prev, current){
 
-        console.log(next, prev)
+        const ti =  "ti" in current.formdata? current.formdata.ti: "";
+
+        return `${prev} ${ti}`
+
     }, "")
 
 }

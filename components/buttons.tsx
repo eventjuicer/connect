@@ -8,14 +8,15 @@ type IconButtonProps = {
     onClick?: ()=>void;
     href?: string | undefined; 
     icon: React.ReactElement;
+    size?: string;
 }
 
-export function IconButton({onClick, href, icon, variant="outline"}: IconButtonProps){
+export function IconButton({onClick, href, size="icon", icon, variant="outline"}: IconButtonProps){
         
         const {push} = useRouter()
 
 
-        return ( <Button variant={variant} size="icon" onClick={onClick}>
+        return ( <Button variant={variant} size={size} onClick={onClick}>
             {React.cloneElement(icon, {className: cn(icon.props.className, "h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all ")})}
         </Button>
         )
