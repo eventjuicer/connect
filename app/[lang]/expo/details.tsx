@@ -4,7 +4,6 @@ import { useFetch } from "@/lib/fetch"
 import { get } from 'lodash'
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Markdown from 'react-markdown'
-import { Suspense } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { 
     Linkedin, 
@@ -23,19 +22,15 @@ import { addToFavorites } from "./actions"
 
 
 
-export function Loading(){
-
-    return (<div className="border rounded-md">
-        <Skeleton className="h-[10px] max-w-[750px] w-full m-2" />
-        <Skeleton className="h-[10px] max-w-[750px] w-full m-2" />
-        <Skeleton className="h-[10px] max-w-[750px] w-full m-2" />
-        <Skeleton className="h-[10px] max-w-[750px] w-full m-2" />
-    </div>)
-}
-
 export function CompanyName({id}: {id: number}){
 
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
+
+    if(!data || isLoading || error){
+
+        return <Skeleton className="h-[20px] w-[50%] m-4" />
+
+    }
 
     return <div>{get(data, "profile.name", "")}</div>
 
@@ -47,6 +42,10 @@ export function CompanyLocation({id}: {id: number}){
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
     const booths = getBooths(get(data, "instances", []))
+
+    if(!booths){
+        return null
+    }
 
     return <span className="flex gap-1 flow-row my-2"><MapPin />{booths}</span>;
 
@@ -63,8 +62,6 @@ export function ScrollableMarkdownContent({str}: {str: string}){
 
 export function CompanyActions({id}: {id: number}){
 
-    const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
-
     return (<div className="flex gap-1 flex-row items-center">
 
        
@@ -80,7 +77,8 @@ export function CompanyLinks({id}: {id: number}){
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
     if(!data || isLoading || error){
-        return null
+        return  <Skeleton className="h-[20px] w-full m-4" />
+
     }
 
     return (<div className="flex gap-1 mt-2 mb-2">
@@ -97,6 +95,13 @@ export function CompanyDetails({id}: {id: number}){
 
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
+
+    if(!data || isLoading || error){
+        return  <div>
+            <Skeleton className="h-[20px] w-[50%] m-4" />
+            <Skeleton className="h-[220px] w-full m-4" />
+        </div>
+    }
 
     return (
 
@@ -134,12 +139,12 @@ export function CompanyDetails({id}: {id: number}){
 
 export function CompanyDetailsWithLoader({id}: {id: number}){
 
-    return (<Suspense fallback={<Loading />}>
+    return (
         <div className="flex flex-col">
        
         <CompanyDetails id={id} />
         </div>
-        </Suspense>)
+      )
 }
 
 
