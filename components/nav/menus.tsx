@@ -32,7 +32,7 @@ export function MobileMenu(){
           {items.map(item => (
 
            
-            <NextLink href={item.href} legacyBehavior passHref>
+            <NextLink key={item.href} href={item.href} legacyBehavior passHref>
                  <MenubarItem key={item.href}>
                 { item.label}
                     </MenubarItem> 

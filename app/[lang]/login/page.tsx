@@ -1,5 +1,5 @@
 
-import { ProfileForm } from "@/app/[lang]/login/forms";
+import { ProfileForm } from "./forms";
 
 
 
