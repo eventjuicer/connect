@@ -4,7 +4,10 @@ import ModeToggler from "@/components/theme"
 
 import Link from "next/link"
 import Image from "next/image"
-import { NavbarMenu } from "@/components/nav/menus"
+import { NavbarMenu, MobileMenu } from "@/components/nav/menus"
+
+
+
 
 export async function TopBar(){
 
@@ -16,6 +19,10 @@ export async function TopBar(){
       <header className="sticky flex items-center top-0 z-50 w-full  h-20 border-b border-border/40 bg-background/80">
 
 <div className="container px-10  flex justify-between items-center">
+
+
+<MobileMenu />
+
 <Link href="/">
 <Image src="/images/EBE_WH.png" priority width={100} height={30} alt="" className="dark:invert" />
 </Link>

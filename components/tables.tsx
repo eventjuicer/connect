@@ -1,6 +1,6 @@
 "use client"
  
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import {
   ColumnDef,
@@ -41,7 +41,9 @@ interface DataTableProps<TData, TValue> {
   }: DataTableProps<TData, TValue>) {
 
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+    const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({
+      select: false
+    });
 
     const table = useReactTable({
       data,
@@ -51,12 +53,42 @@ interface DataTableProps<TData, TValue> {
       getFilteredRowModel: getFilteredRowModel(),
       state: {
         columnFilters,
-        //columnVisibility
+        columnVisibility
       },
-      //onColumnVisibilityChange: setColumnVisibility,
+      onColumnVisibilityChange: setColumnVisibility,
     })
 
-   
+    useEffect(()=>{
+
+      if(columnFilters.length>1){
+      //TODO: reset TAGS when using search
+
+      //console.log(columnFilters)
+
+      }
+
+
+      //table.getRowModel().rows?.length
+
+      if(!columnFilters.length || !table.getFilteredRowModel().rows?.length){
+        setColumnVisibility({select: false})
+      }else{
+        setColumnVisibility({select: true})
+
+      }
+
+
+    }, [columnFilters])
+
+  //   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
+  //     data,
+  //     columns,
+  //     initialState: {
+  //         hiddenColumns: columns.map(column => {
+  //             if (column.show === false) return column.accessor || column.id;
+  //         }),
+  //     },
+  // });
     /**
      * 
     
