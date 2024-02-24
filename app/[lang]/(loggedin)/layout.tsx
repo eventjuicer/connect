@@ -7,7 +7,7 @@ export default  async function Layout({
   children: React.ReactNode;
 }>){
 
-  checkUser();
+  await checkUser();
 
 return (
 <div>

@@ -1,9 +1,12 @@
+"use server"
+
 import { cookies } from "next/headers"
 import { redirect } from "next/navigation";
+import { checkToken } from "@/app/actions";
 
-export function checkUser(){
+export async function checkUser(){
 
-    const token = cookies().get("VISITOR_TOKEN")?.value;
+    const token = await checkToken();
 
     if(!token){
         redirect("/login")

@@ -9,6 +9,11 @@ export  async function action() {
   revalidateTag('collection')
 }
 
+export async function checkToken(){
+  return cookies().get("VISITOR_TOKEN")?.value;
+}
+
+
 
 
 export async function handleLogin(sessionData) {

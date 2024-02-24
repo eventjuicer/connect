@@ -18,7 +18,7 @@ import {
 import { IconButton } from "@/components/buttons"
 import { FixedTabs } from "@/components/tabs"
 import { getBooths } from "@/lib/data"
-
+import { addToFavorites } from "./actions"
 
 
 
@@ -37,7 +37,7 @@ export function CompanyName({id}: {id: number}){
 
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
-    return <h2>{get(data, "profile.name", "")}</h2>
+    return <div>{get(data, "profile.name", "")}</div>
 
 }
 
@@ -48,16 +48,14 @@ export function CompanyLocation({id}: {id: number}){
 
     const booths = getBooths(get(data, "instances", []))
 
-    console.log( booths)
-
-    return <div className="flex gap-1 flow-row mr-5"><MapPin />{booths}</div>;
+    return <span className="flex gap-1 flow-row my-2"><MapPin />{booths}</span>;
 
 }
 
 export function ScrollableMarkdownContent({str}: {str: string}){
 
     return (
-        <ScrollArea className="h-[200px] w-full rounded-md border p-4">
+        <ScrollArea className="h-[250px] w-full rounded-md border p-4">
         <Markdown>{str}</Markdown>
         </ScrollArea>
     )
@@ -69,9 +67,9 @@ export function CompanyActions({id}: {id: number}){
 
     return (<div className="flex gap-1 flex-row items-center">
 
-        <CompanyLocation id={id} />
-        <IconButton icon={  <CalendarClock /> } />
-        <IconButton icon={  <Star /> } />
+       
+        <IconButton icon={  <CalendarClock /> } onClick={()=>addToFavorites(id)} />
+        <IconButton icon={  <Star /> } onClick={()=>addToFavorites(id)} />
 
     </div>)
 
@@ -81,12 +79,16 @@ export function CompanyLinks({id}: {id: number}){
 
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
+    if(!data || isLoading || error){
+        return null
+    }
+
     return (<div className="flex gap-1 mt-2 mb-2">
        
-        <IconButton icon={  <ExternalLink /> } />
-        <IconButton icon={  <Linkedin /> } />
-        <IconButton icon={  <Twitter /> } />
-        <IconButton icon={  <Facebook /> } />
+        {<IconButton size="bigIcon" icon={  <ExternalLink /> } href={get(data, "profile.website")} />}
+        <IconButton size="bigIcon" icon={  <Linkedin /> }  href={get(data, "profile.linkedin")}  />
+        <IconButton size="bigIcon" icon={  <Twitter /> }  href={get(data, "profile.twitter")} />
+        <IconButton size="bigIcon" icon={  <Facebook /> }  href={get(data, "profile.facebook")}  />
 
     </div>)
 }
