@@ -3,7 +3,19 @@
 import { Button } from "@/components/ui/button"
 import { MoreHorizontal, MapPin } from "lucide-react"
 import { useModal } from "@/components/modal"
-import { CompanyDetails, CompanyName } from "./details"
+import { CompanyDetailsWithLoader, CompanyName, CompanyActions } from "./details"
+
+
+function DetailsHeader({id}:{id?: number}){
+
+
+    return (<div className="flex flex-row justify-between align-middle">
+        <CompanyName id={id} />
+        <CompanyActions id={id} />
+    </div>)
+}
+
+
 
 export function ShowDetails({id, details}:{id?: number}){
 
@@ -16,8 +28,8 @@ export function ShowDetails({id, details}:{id?: number}){
 
 
     return ( <Button variant="outline" size="icon" onClick={() => {
-        setLabel(<CompanyName id={id} />);
-        setContent(<CompanyDetails id={id} />);
+        setLabel(<DetailsHeader id={id} />);
+        setContent(<CompanyDetailsWithLoader id={id} />);
     }}>
     <MoreHorizontal className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all " />
     </Button>

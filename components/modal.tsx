@@ -87,10 +87,10 @@ export function Modal(){
 
         </DrawerHeader>
 
-        <div className="p-4 pb-0 my-10">
-        <div className="flex items-center justify-center space-x-2">
+        <div className="px-4 my-5">
+       
         {content}
-        </div>
+        
         </div>
 
         <DrawerFooter>

@@ -6,34 +6,143 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import Markdown from 'react-markdown'
 import { Suspense } from "react"
 import { Skeleton } from "@/components/ui/skeleton"
+import { 
+    Linkedin, 
+    Twitter, 
+    Facebook, 
+    ExternalLink, 
+    CalendarClock,
+    Star,
+    MapPin
+} from "lucide-react"
+import { IconButton } from "@/components/buttons"
+import { FixedTabs } from "@/components/tabs"
+import { getBooths } from "@/lib/data"
 
 
 
+
+
+export function Loading(){
+
+    return (<div className="border rounded-md">
+        <Skeleton className="h-[10px] max-w-[750px] w-full m-2" />
+        <Skeleton className="h-[10px] max-w-[750px] w-full m-2" />
+        <Skeleton className="h-[10px] max-w-[750px] w-full m-2" />
+        <Skeleton className="h-[10px] max-w-[750px] w-full m-2" />
+    </div>)
+}
 
 export function CompanyName({id}: {id: number}){
 
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
-    if(error || isLoading){
-        return null
-    }
+    return <h2>{get(data, "profile.name", "")}</h2>
 
-    return get(data, "profile.name", "")
+}
 
+
+export function CompanyLocation({id}: {id: number}){
+
+    const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
+
+    const booths = getBooths(get(data, "instances", []))
+
+    console.log( booths)
+
+    return <div><MapPin /></div>;
+
+}
+
+export function ScrollableMarkdownContent({str}: {str: string}){
+
+    return (
+        <ScrollArea className="h-[200px] w-full rounded-md border p-4">
+        <Markdown>{str}</Markdown>
+        </ScrollArea>
+    )
+}
+
+export function CompanyActions({id}: {id: number}){
+
+    const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
+
+    return (<div className="flex gap-1">
+
+        <CompanyLocation id={id} />
+        <IconButton icon={  <CalendarClock /> } />
+        <IconButton icon={  <Star /> } />
+
+    </div>)
+
+}
+
+export function CompanyLinks({id}: {id: number}){
+
+    const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
+
+    return (<div className="flex gap-1 mt-2 mb-2">
+       
+        <IconButton icon={  <ExternalLink /> } />
+        <IconButton icon={  <Linkedin /> } />
+        <IconButton icon={  <Twitter /> } />
+        <IconButton icon={  <Facebook /> } />
+
+    </div>)
 }
 
 export function CompanyDetails({id}: {id: number}){
 
     const {data, isLoading, error} = useFetch(`/api/public/companies/${id}`)
 
-    const cn = "h-[200px] max-w-[750px] w-full rounded-md border p-4"
 
-    return <Suspense fallback={<Skeleton className={cn} />}><ScrollArea className={cn}>
-        <Markdown>{get(data, "profile.about", "")}</Markdown>
-    </ScrollArea></Suspense>
+    return (
 
+   <FixedTabs 
+   contentClassName="h-[250px]"
+   defaultLabel="about"
+   items={[
+    {
+        label: "about", 
+        content: (
+           <ScrollableMarkdownContent str={get(data, "profile.about", "")}/>
+        )
+    },
+    {
+        label: "products", 
+        content: (
+           <ScrollableMarkdownContent str={get(data, "profile.products", "")}/>
+        )
+    },
+
+    {
+        label: "connect", 
+        content: (
+           <CompanyLinks id={id} />
+        )
+    },
+
+    
+   ]} />
+
+    )
 
 }
+
+
+export function CompanyDetailsWithLoader({id}: {id: number}){
+
+    return (<Suspense fallback={<Loading />}>
+        <div className="flex flex-col">
+       
+        <CompanyDetails id={id} />
+        </div>
+        </Suspense>)
+}
+
+
+
+
 
 /**
  * 
