@@ -69,11 +69,22 @@ export const columns: ColumnDef<Exhibitor>[] = [
         enableHiding: false,
       },
 
+      {
+        id: "actions",
+        cell: ({row}) => {
+
+            const {id} = row.original  
+            return (
+              <ShowDetails id={id} />
+            )
+        }
+    },
+
    
     {
       id: "name",
       accessorFn: (row) => row.profile.name,
-      header: "name",
+      header: "name"
     },
     {
       id: "keywords",
@@ -82,7 +93,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
 
         return (
           <div className="flex gap-1 flex-wrap">
-            { row.getValue("keywords").map(label => <TranslatedBadge key={label} label={label} />) }
+            { row.getValue("keywords").map(label => <TranslatedBadge className="text-gray-800 dark:text-gray-400" key={label} label={label} />) }
           </div>
         )
       },
@@ -92,18 +103,17 @@ export const columns: ColumnDef<Exhibitor>[] = [
       },
     },
    
-
     {
-        id: "actions",
-        cell: ({row}) => {
+      id: "secondaryActions",
+      cell: ({row}) => {
 
-            const {id} = row.original  
-            return (
-                <div className="flex md:flex-row flex-col gap-1">
-                <ShowDetails id={id} />
-                <ShowLocation id={id} />
-                </div>
-            )
-        }
-    },
+          const {id} = row.original  
+          return (
+            <ShowLocation id={id} />
+          )
+      }
+  },
+  
+
+   
 ]

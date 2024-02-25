@@ -1,5 +1,4 @@
 
- import { Suspense } from "react";
 import { callPublicApi } from "@/lib/api";
 import { DataTable } from "@/components/tables";
 import {columns} from './columns'
@@ -14,9 +13,8 @@ export default async function  Home() {
     <div>
 
      
-      <Suspense fallback={<div>asd</div>}>
-      <DataTable columns={columns} data={data} searchBy="name" additionalFilters={ [ <FilterByKeywords column="keywords" />] } />
-      </Suspense>
+       <DataTable columns={columns} data={data} searchBy="name" additionalFilters={ [ <FilterByKeywords column="keywords" />] } />
+ 
    
      
     </div>

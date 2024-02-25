@@ -17,15 +17,15 @@ type ExhibitorPurchase = {
   formdata: {ti: string, id: string};
 }
 
-type Exhibitor = {
+type Visitor = {
     id: number;
     amount: number;
     slug: string;
-    profile: ExhibitorProfile;
-    instances: Array<ExhibitorPurchase>;
+    // profile: ExhibitorProfile;
+    // instances: Array<ExhibitorPurchase>;
   }
    
-export const columns: ColumnDef<Exhibitor>[] = [
+export const columns: ColumnDef<Visitor>[] = [
 
     {
         id: "select",

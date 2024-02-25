@@ -8,7 +8,9 @@ function getItemsForSlot(slots: Array<any>, time: string){
 
 }
 
-export default function ScheduleTable({venues=[], slots=[], items=[]}: ScheduleProps){
+export default function ScheduleTable({venues=[], slots=[], data=[]}: ScheduleProps){
+
+  console.log(data)
 
 return (<div>
    
@@ -18,7 +20,7 @@ return (<div>
    </div>
     
 
-    {slots.map(slot => <Slot key={slot.time} {...slot} venues={venues} items={getItemsForSlot(items, slot.time)}/>)}
+    {slots.map(slot => <Slot key={slot.time} {...slot} venues={venues} items={getItemsForSlot(data, slot.time)}/>)}
      
   
   </div>
