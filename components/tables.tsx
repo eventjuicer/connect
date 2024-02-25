@@ -115,7 +115,7 @@ interface DataTableProps<TData, TValue> {
 
     return (
       <div>
-      <div className="flex items-center py-4 gap-4">
+      <div className="sticky top-20 z-50 left-0 flex items-center py-4 gap-4 border-b-3 border-border/20 bg-background/80">
 
         {searchBy? <Input
           placeholder="Filter names..."
