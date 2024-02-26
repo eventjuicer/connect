@@ -36,8 +36,8 @@ export default  async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={
         cn(
-          "relative flex min-h-screen flex-col bg-background  font-sans antialiased",
-          fontSans.variable
+          "relative flex min-h-screen flex-col bg-background  sfont-sans antialiased",
+          fontSans.className
         )
       }> 
         <ThemeProvider
