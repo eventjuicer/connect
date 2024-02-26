@@ -16,6 +16,7 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 
+
 export const metadata: Metadata = {
   title: settings?.metadata?.name || "",
   description: "",
@@ -36,8 +37,8 @@ export default  async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={
         cn(
-          "relative flex min-h-screen flex-col bg-background  sfont-sans antialiased",
-          fontSans.className
+          "relative flex min-h-screen flex-col font-sans bg-background antialiased",
+          fontSans.variable
         )
       }> 
         <ThemeProvider
@@ -56,7 +57,7 @@ export default  async function RootLayout({
 <TopBar  />
 
 
-<main className="flex-1 mt-20">
+<main className="flex-1 mt-12">
   <div className="container">
   
   { children }
