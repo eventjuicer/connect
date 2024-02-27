@@ -38,7 +38,8 @@ export default  async function RootLayout({
       <body className={
         cn(
           "relative flex min-h-screen flex-col font-sans bg-background antialiased",
-          fontSans.variable
+          fontSans.variable, 
+          fontSans.className
         )
       }> 
         <ThemeProvider
