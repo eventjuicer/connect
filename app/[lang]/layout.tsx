@@ -10,11 +10,14 @@ import { TopBar } from "@/components/nav/topbar";
 import settings from '@/settings.mjs'
 import { Modal } from "@/components/modal"
 
+// import { fontFamily } from "tailwindcss/defaultTheme"
+
 
 const fontSans = FontSans({ 
   subsets: ["latin"],
   variable: "--font-sans",
-  display: "swap"
+  display: "swap",
+  // fallback: fontFamily.sans
 });
 
 

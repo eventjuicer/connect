@@ -19,8 +19,8 @@ export  async function GET(
   const data = await callServiceApi("token", {token})
 
   if(data){
-      cookies().set("VISITOR_TOKEN", token)
-      return  redirect("/profile")
+    cookies().set("VISITOR_TOKEN", token)
+    return goto && goto.charAt(0)==="/"? redirect(goto): redirect("/profile")
   }else{
     cookies().delete("VISITOR_TOKEN")
     redirect("/login")
@@ -52,38 +52,38 @@ export  async function GET(
 "scannedon": 0,
 "unsubscribed": 0,
 "fields": {
-"nip": "9241920439",
-"cname2": "Soy Fragrance",
-"position": "właściciel",
-"phone": "723440469",
-"lname": "Marciniak",
-"fname": "Wiktoria",
-"locale": "pl",
-"url": "https://targiehandlu.pl/?fbclid=IwAR2Aqfk2yld4062hUGneLUFZsnTe_AGz2RaVH1S2vEY9zwdSmXKQFe9PbUs"
+  "nip": "9241920439",
+  "cname2": "Soy Fragrance",
+  "position": "właściciel",
+  "phone": "723440469",
+  "lname": "Marciniak",
+  "fname": "Wiktoria",
+  "locale": "pl",
+  "url": "https://targiehandlu.pl/?fbclid=IwAR2Aqfk2yld4062hUGneLUFZsnTe_AGz2RaVH1S2vEY9zwdSmXKQFe9PbUs"
 },
 "roles": [
-"visitor"
+  "visitor"
 ],
 "purchases": [
-{
-"id": 226361,
-"paid": 1,
-"status": "ok",
-"status_source": "auto",
-"tickets": [
-{
-"id": 2678,
-"name": "Zwiedzanie 2024 / Wiosna",
-"names": {
-"pl": "Zwiedzanie 2024 / Wiosna",
-"en": "Zwiedzanie 2024 / Wiosna",
-"de": "Zwiedzanie 2024 / Wiosna"
-},
-"translation_asset_id": "visitor",
-"role": "visitor",
-"delayed": 0,
-"featured": 0
-}
+  {
+  "id": 226361,
+  "paid": 1,
+  "status": "ok",
+  "status_source": "auto",
+  "tickets": [
+  {
+  "id": 2678,
+  "name": "Zwiedzanie 2024 / Wiosna",
+  "names": {
+  "pl": "Zwiedzanie 2024 / Wiosna",
+  "en": "Zwiedzanie 2024 / Wiosna",
+  "de": "Zwiedzanie 2024 / Wiosna"
+  },
+  "translation_asset_id": "visitor",
+  "role": "visitor",
+  "delayed": 0,
+  "featured": 0
+  }
 ]
 }
 ],

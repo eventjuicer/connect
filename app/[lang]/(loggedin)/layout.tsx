@@ -1,5 +1,5 @@
 
-import { checkUser } from "./actions"
+import { checkUser } from "@/app/actions"
 
 export default  async function Layout({
   children
@@ -7,12 +7,8 @@ export default  async function Layout({
   children: React.ReactNode;
 }>){
 
-  await checkUser();
+await checkUser();
 
-return (
-<div>
-asdasdasd {children}
-</div>
-  );
+return children;
 
 }

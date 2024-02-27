@@ -3,14 +3,41 @@
 import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
 import { sendSparkPostEmail } from '@/lib/sparkpost'
+import { redirect } from "next/navigation";
+import { callServiceApi } from "@/lib/api";
+
+
+export async function checkToken(){
+  return await cookies().get("VISITOR_TOKEN")?.value;
+}
+
+
+export async function getUser(){
+
+  const token = await checkToken();
+
+  if(token){
+    const data = await callServiceApi("token", {token})
+    return data
+  }
+  return null;
+}
+
+
+export async function checkUser(){
+
+   const user  = await getUser();
+
+    if(!user){
+      redirect("/login")
+    }   
+
+}
+
 
 
 export  async function action() {
   revalidateTag('collection')
-}
-
-export async function checkToken(){
-  return cookies().get("VISITOR_TOKEN")?.value;
 }
 
 
