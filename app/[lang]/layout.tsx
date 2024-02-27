@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import {  Inter as FontSans } from "next/font/google";
 import "@/app/globals.css";
+import {  Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/providers/ThemeProvider"
 import TranslationProvider from "@/providers/TranslationProvider";
@@ -14,6 +14,7 @@ import { Modal } from "@/components/modal"
 const fontSans = FontSans({ 
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap"
 });
 
 
@@ -37,9 +38,8 @@ export default  async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={
         cn(
-          "relative flex min-h-screen flex-col font-sans bg-background antialiased",
-          fontSans.variable, 
-          fontSans.className
+          fontSans.variable,
+          "relative flex min-h-screen flex-col font-sans bg-background antialiased"
         )
       }> 
         <ThemeProvider
