@@ -1,5 +1,6 @@
 "use client"
  
+import { Exhibitor } from "./types"
 import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
 import {TranslatedBadge} from '@/components/badges'
@@ -8,22 +9,7 @@ import { uniq, get } from "lodash"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-type ExhibitorProfile = {
-    name: string;
-    keywords: Array<string>;
-}
 
-type ExhibitorPurchase = {
-  formdata: {ti: string, id: string};
-}
-
-type Exhibitor = {
-    id: number;
-    amount: number;
-    slug: string;
-    profile: ExhibitorProfile;
-    instances: Array<ExhibitorPurchase>;
-  }
    
 export const columns: ColumnDef<Exhibitor>[] = [
 
@@ -69,16 +55,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
         enableHiding: false,
       },
 
-      {
-        id: "actions",
-        cell: ({row}) => {
-
-            const {id} = row.original  
-            return (
-              <ShowDetails id={id} />
-            )
-        }
-    },
+       
 
    
     {
@@ -103,16 +80,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
       },
     },
    
-    {
-      id: "secondaryActions",
-      cell: ({row}) => {
-
-          const {id} = row.original  
-          return (
-            <ShowLocation id={id} />
-          )
-      }
-  },
+     
   
 
    

@@ -1,19 +1,16 @@
 
  
-import { DataTable } from "@/components/tables";
-import {columns} from './columns'
+import { Skeleton } from "@/components/ui/skeleton";
 
-export default async function  Home() {
-
-
+export default async function  Loading() {
 
   return (
 
     <div>
 
-    
+    <Skeleton className="h-[200px] w-full" />
   
-     
+
     </div>
 
 

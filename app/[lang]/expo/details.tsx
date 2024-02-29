@@ -1,5 +1,6 @@
 "use client"
 
+import React from 'react'
 import { useFetch } from "@/lib/fetch"
 import { get } from 'lodash'
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -18,8 +19,34 @@ import { IconButton } from "@/components/buttons"
 import { FixedTabs } from "@/components/tabs"
 import { getBooths } from "@/lib/data"
 import { addToFavorites } from "./actions"
+import { useModal } from "@/components/modal"
 
 
+
+export function useOnRowClick(){
+
+    const {setLabel, setSecondaryLabel, setContent} = useModal(state=>({
+        setLabel: state.setLabel,
+        setSecondaryLabel: state.setSecondaryLabel,
+        setContent: state.setContent
+    }))
+
+    return React.useCallback((id: number)=>{
+        setLabel(<DetailsHeader id={id} />);
+        setSecondaryLabel(  <CompanyLocation id={id} /> );
+        setContent(<CompanyDetailsWithLoader id={id} />);
+    }, [])
+}
+
+
+function DetailsHeader({id}:{id?: number}){
+
+
+    return (<div className="flex flex-row justify-between items-center">
+        <CompanyName id={id} />
+        <CompanyActions id={id} />
+    </div>)
+}
 
 
 export function CompanyName({id}: {id: number}){

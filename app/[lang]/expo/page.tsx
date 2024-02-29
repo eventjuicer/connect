@@ -1,8 +1,6 @@
 
 import { callPublicApi } from "@/lib/api";
-import { DataTable } from "@/components/tables";
-import {columns} from './columns'
-import { FilterByKeywords } from "./filters"
+import { Table } from "./table";
 
 export default async function  Home() {
 
@@ -12,11 +10,9 @@ export default async function  Home() {
 
     <div>
 
-     
-       <DataTable columns={columns} data={data} searchBy="name" additionalFilters={ [ <FilterByKeywords column="keywords" />] } />
+    <Table data={data} />
  
-   
-     
+
     </div>
 
 

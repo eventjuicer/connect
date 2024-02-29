@@ -1,6 +1,6 @@
 "use client"
  
-import React, { useEffect } from 'react'
+import React, { ReactHTMLElement, useEffect } from 'react'
 
 import {
   ColumnDef,
@@ -30,20 +30,25 @@ interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     searchBy?: string;
-    additionalFilters?: React.ReactElement[]
+    additionalFilters?: React.ReactElement[];
+    //onRowClick?: React.MouseEventHandler<React;
   }
    
   export function DataTable<TData, TValue>({
     columns,
     data,
     searchBy,
-    additionalFilters
+    additionalFilters,
+    onRowClick
   }: DataTableProps<TData, TValue>) {
 
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({
       select: false
     });
+
+   
+    
 
     const table = useReactTable({
       data,
@@ -162,6 +167,10 @@ interface DataTableProps<TData, TValue> {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={()=> {
+                     const {id} = row.original
+                     onRowClick(id)
+                  }}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
