@@ -22,16 +22,17 @@ type TranslatableSelectProps = {
   baseLabel?: string;
   items: Array<TranslatableSelectItemsProps>;
   onValueChange: TranslatableSelectCallback;
+  value?: string;
 }
 
 
-export function TranslatableSelect({label="", baseLabel="", items, onValueChange}: TranslatableSelectProps){
+export function TranslatableSelect({label="", baseLabel="", items, value, onValueChange}: TranslatableSelectProps){
 
   const translate = useTranslate()
   const onValueChangeCallback = useCallback((val: string) => onValueChange(val), [onValueChange])
 
   return (
-    <Select onValueChange={onValueChangeCallback}>
+    <Select onValueChange={onValueChangeCallback} value={value}>
     <SelectTrigger className="w-[180px]">
     <SelectValue placeholder={translate(label)} />
     </SelectTrigger>

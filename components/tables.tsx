@@ -31,7 +31,7 @@ interface DataTableProps<TData, TValue> {
     data: TData[];
     searchBy?: string;
     additionalFilters?: React.ReactElement[];
-    //onRowClick?: React.MouseEventHandler<React;
+    //onRowClick?: React.MouseEventHandler<>;
   }
    
   export function DataTable<TData, TValue>({

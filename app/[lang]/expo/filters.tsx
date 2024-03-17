@@ -3,7 +3,7 @@
 import React from 'react'
 import {TranslatableSelect} from '@/components/selects'
 import { getSettings } from '@/lib/settings'
-
+import { useSearchParams } from 'next/navigation'
 type FilterByKeywordsProps = {
     setting?: string;
     column: string;
@@ -25,8 +25,14 @@ const defaultProps = {
 
 export function FilterByKeywords({setting="company.tags", column="", onValueChange}: FilterByKeywordsProps){
 
+    const searchParams = useSearchParams()
+
+    const cat = searchParams.get("category");
+
+    console.log({searchParams, cat})
+
     const props = Object.assign({}, defaultProps, getSettings(setting))
 
-    return (<TranslatableSelect {...props} onValueChange={onValueChange} />)
+    return (<TranslatableSelect {...props} value={cat} onValueChange={onValueChange} />)
 }
 

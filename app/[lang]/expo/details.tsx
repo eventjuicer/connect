@@ -3,8 +3,7 @@
 import React from 'react'
 import { useFetch } from "@/lib/fetch"
 import { get } from 'lodash'
-import { ScrollArea } from "@/components/ui/scroll-area"
-import Markdown from 'react-markdown'
+
 import { Skeleton } from "@/components/ui/skeleton"
 import { 
     Linkedin, 
@@ -20,7 +19,7 @@ import { FixedTabs } from "@/components/tabs"
 import { getBooths } from "@/lib/data"
 import { addToFavorites } from "./actions"
 import { useModal } from "@/components/modal"
-
+import { ScrollableMarkdownContent } from '@/components/scrollable'
 
 
 export function useOnRowClick(){
@@ -78,14 +77,7 @@ export function CompanyLocation({id}: {id: number}){
 
 }
 
-export function ScrollableMarkdownContent({str}: {str: string}){
 
-    return (
-        <ScrollArea className="h-[250px] w-full rounded-md border p-4">
-        <Markdown>{str}</Markdown>
-        </ScrollArea>
-    )
-}
 
 export function CompanyActions({id}: {id: number}){
 
