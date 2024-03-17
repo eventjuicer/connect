@@ -72,7 +72,7 @@ export function Modal(){
   
     return (
 
-        <Drawer onClose={close} open={content}>
+        <Drawer open={content}>
         {/* <DrawerTrigger>Open</DrawerTrigger> */}
         <DrawerContent >
         <div className="mx-auto w-full max-w-3xl">

@@ -16,6 +16,9 @@ import { FixedTabs } from "@/components/tabs"
 import { IconButton } from "@/components/buttons"
 import { Star } from "lucide-react"
 import { addToFavorites } from "./actions"
+import { useSetQueryString } from "@/lib/url"
+import {head} from 'lodash'
+
 
 function PresentationActions({id}: {id: number}){
 
@@ -28,17 +31,25 @@ function PresentationActions({id}: {id: number}){
 
 }
 
-function Details(props: Presenter){
+function Details({data}: {data: Presenter[]}){
 
+    const presentation = head(data)
 
     return (
     <div>
 
-    <h1 className="text-2xl mb-3">{props.presentation_title}</h1>
+    <h1 className="text-2xl mb-3">{presentation.presentation_title}</h1>
 
     <FixedTabs defaultLabel="description" items={[
-        {label: "description", content:  <ScrollableMarkdownContent str={props.presentation_description} />},
-        {label: "presenter", content: <ScrollableMarkdownContent str={props.bio} />}
+        {
+            label: "description", 
+            content:  <ScrollableMarkdownContent str={presentation.presentation_description} />
+        },
+        ...data.map(item => ({
+            label: item.presenter, 
+            content: <ScrollableMarkdownContent str={item.bio} />
+        }))
+        
     ]}/>
    
     </div>)
@@ -54,31 +65,55 @@ function Time({time}: {time: string}){
     return time
 }
 
+function Title({title}: {title: string}){
+    if(title.length > 80){
+        return `${title.substring(0, 80)}...`
+    }
+    return title
+}
 
-export function Presentation(props: Presenter){
+function Presenters({data}:{data: Presenter[]}){
+
+    return <div className="text-pretty">{data.map(presenter => <div className="mb-1">
+    {presenter.presenter}, {presenter.position}  <span className="dark:text-primary bg-muted">{presenter.cname2}</span>
+    </div>)}</div>
+}
+
+export function Presentation({data}: {data: Presenter[]}){
 
     const {setLabel, setContent} = useModal((state) => ({
         setLabel: state.setLabel,
-        setContent: state.setContent
+        setContent: state.setContent,
     }))
 
-    return ( <Card className="transition-colors hover:bg-muted/50 cursor-pointer" onClick={()=>{
+    const setQueryString = useSetQueryString()
+
+    const presentation = head(data)
+
+    return ( <Card className="transition-colors hover:bg-muted/50 cursor-pointer mr-1 mb-1" onClick={()=>{
+        setQueryString([
+            ["id", presentation.id]
+        ])
         setLabel(<div className="flex flex-row justify-between items-center">
             <div>
-            <Venue name={props.presentation_venue} />
-            <Time time={props.presentation_time} />
+            <Venue name={presentation.presentation_venue} />
+            <Time time={presentation.presentation_time} />
             </div>
-            <PresentationActions id={props.id} />
+            <PresentationActions id={presentation.id} />
         </div>);
-        setContent(<Details {...props} />);
+        setContent(<Details data={data} />);
     }}>
         <CardHeader>
-            <CardTitle>{props.presentation_title}</CardTitle>
-            <CardDescription>{props.presenter}</CardDescription>
+        <CardDescription>     {presentation.presentation_time}</CardDescription>
+            <CardTitle>
+                <Title title={presentation.presentation_title} />
+            </CardTitle>
+         
           </CardHeader>
     
             <CardContent>
-                asd
+            <Presenters data={data} />
+           
             </CardContent>
         </Card>
     )

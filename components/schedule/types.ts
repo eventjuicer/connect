@@ -25,6 +25,7 @@ export type Presenter = {
     bio: string;
     position: string;
     presenter: string;
+    presenters?: Array<string>;
     lname: string;
     fname: string;
     cname2: string;

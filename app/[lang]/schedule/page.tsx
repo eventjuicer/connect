@@ -24,15 +24,15 @@ export default async function  Home() {
         {name: "D"}
       ]} 
       slots={[
-        {time: "10:00"}, 
-        {time: "11:00"}, 
-        {time: "12:00"},
-        {time: "13:00"}, 
-        {time: "14:00"}, 
-        {time: "15:00"},
-        {time: "16:00"}, 
-        {time: "17:00"}, 
-        {time: "18:00"}
+        {time: "10:40"}, 
+        {time: "11:15"}, 
+        {time: "11:50"},
+        {time: "12:40"},
+        {time: "13:15"}, 
+        {time: "14:05"}, 
+        {time: "14:40"},
+        {time: "15:30"}, 
+        {time: "16:05"}
 
       ]} 
     />
