@@ -17,7 +17,12 @@ export function useSetQueryString(){
         (arr: Array<Array<[name: string, value: string]>>) => {
           const params = new URLSearchParams(searchParams.toString())
           arr.forEach((item)=> {
-            params.set(item[0], item[1])
+
+            if(!item[1]){
+              params.delete(item[0])
+            }else{
+              params.set(item[0], item[1])
+            }
           })
          
   

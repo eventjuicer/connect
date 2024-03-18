@@ -15,8 +15,7 @@ import { Button } from "@/components/ui/button"
 import {isFunction} from 'lodash'
 import { useTranslate } from "@/lib/contexts"
 import {create} from 'zustand'
-
-
+import { useSetQueryString } from "@/lib/url"
 
 
 
@@ -69,10 +68,12 @@ export function Modal(){
       onSubmit: state.onSubmit
     }))
 
+    const setQueryString = useSetQueryString()
+
   
     return (
 
-        <Drawer open={content}>
+        <Drawer open={content} onClose={() => setQueryString([["id", ""]]) }>
         {/* <DrawerTrigger>Open</DrawerTrigger> */}
         <DrawerContent >
         <div className="mx-auto w-full max-w-3xl">
