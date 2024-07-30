@@ -73,9 +73,13 @@ export function Modal(){
   
     return (
 
-        <Drawer open={content} onClose={() => setQueryString([["id", ""]]) }>
+        <Drawer open={content} onClose={(test) => {
+          close()
+          setQueryString([["id", ""]])
+
+        } }>
         {/* <DrawerTrigger>Open</DrawerTrigger> */}
-        <DrawerContent >
+        <DrawerContent  >
         <div className="mx-auto w-full max-w-3xl">
         <DrawerHeader>
         <DrawerTitle>{label}</DrawerTitle>
