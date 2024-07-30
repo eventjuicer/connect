@@ -10,23 +10,8 @@ import {
 } from "lucide-react"
 import { useRouter } from "next/navigation";
 import { useModal } from "../modal";
-import { Separator } from "@/components/ui/separator";
-import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
-
-
-
 import Link from "next/link"
-
 import { cn } from "@/lib/utils"
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu"
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -87,10 +72,11 @@ export function NavigationMenuDemo() {
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
+>(({ className, title, children, href, ...props }, ref) => {
   return (
-    <a
-          ref={ref}
+    <Link href={href} ref={ref}
+ 
+          
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
             className
@@ -101,7 +87,8 @@ const ListItem = React.forwardRef<
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
-        </a>
+       
+        </Link>
   )
 })
 ListItem.displayName = "ListItem"
@@ -120,8 +107,6 @@ function MobileBottomMenuItem({icon=null, href="/", secondary=null}){
 
     const handleOnClick = () => {
         if(secondary){
-            setLabel("asd")
-            setSecondaryLabel("dsa")
             setContent(secondary)
             return
         }
