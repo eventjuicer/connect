@@ -9,7 +9,7 @@ import { cookies } from 'next/headers'
 import { TopBar } from "@/components/nav/topbar";
 import settings from '@/settings.mjs'
 import { Modal } from "@/components/modal"
-
+import { MobileBottomMenu } from "@/components/nav/bottom";
 // import { fontFamily } from "tailwindcss/defaultTheme"
 
 
@@ -75,6 +75,8 @@ export default  async function RootLayout({
 
 <footer className="py-6 md:px-8 md:py-0"></footer>
  
+
+      <MobileBottomMenu />
 
 
           <Modal />
