@@ -16,7 +16,7 @@ import {isFunction} from 'lodash'
 import { useTranslate } from "@/lib/contexts"
 import {create} from 'zustand'
 import { useSetQueryString } from "@/lib/url"
-
+import { DoorClosed } from "lucide-react"
 
 
 /**
@@ -79,17 +79,11 @@ export function Modal(){
 
         } }>
         {/* <DrawerTrigger>Open</DrawerTrigger> */}
-        <DrawerContent  >
+        <DrawerContent className="" >
         <div className="mx-auto w-full max-w-3xl">
         <DrawerHeader>
         <DrawerTitle>{label}</DrawerTitle>
         {secondaryLabel? <DrawerDescription>{secondaryLabel}</DrawerDescription>: null}
-
-        {/* <DrawerClose asChild>
-              <Button variant="outline" onClick={close}>Cancel</Button>
-            </DrawerClose> */}
-
-
         </DrawerHeader>
 
         <div className="px-4 my-5">

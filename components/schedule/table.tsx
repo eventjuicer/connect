@@ -4,8 +4,19 @@ import Venue from "./venue"
 import {Presentation} from "./presentation"
 import { cn } from "@/lib/utils"
 import { sortBy, nth, groupBy, head } from "lodash"
-
+import { create } from "zustand"
  
+
+type ScheduleState = {
+  data: Presenter[],
+  setData: (data: Presenter[]) => void
+}
+
+export const useSchedule = create<ScheduleState>((set) => ({
+  data: [],
+  setData: (data: Array<Presenter>) => set(() => ({ data })),
+}))
+
 
 function getPresentations(data: Array<Presenter>, times: Array<string>, venue: string, time: string): Record<string, Array<Presenter>>{
 
@@ -55,6 +66,8 @@ function PresentationsForTimeSlotAndVenue({data, slots, venue, time}: {
 export default function ScheduleTable({venues=[], slots=[], data=[]}: ScheduleProps){
 
 
+
+
 return (
 
   <div>
@@ -71,7 +84,7 @@ return (
 
       <div key={slot.time} className="flex sm:flex-row flex-col">
         <div className="min-w-[60px]">{slot.time}</div>
-        <div className="grid gap-1 md:grid-cols-4 grid-flow-row grid-cols-1">
+        <div className="grid gap-1 lg:grid-cols-4 grid-flow-row grid-cols-1">
         {venues.map(venue => <div key={`${slot.time}_${venue.name}`} className="flfex fledx-col"><PresentationsForTimeSlotAndVenue data={data} slots={slots.map(slot=>slot.time)} venue={venue.name} time={slot.time}/></div>)} 
         </div>
       </div>))}

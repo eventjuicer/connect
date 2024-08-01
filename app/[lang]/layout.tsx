@@ -10,6 +10,7 @@ import { TopBar } from "@/components/nav/topbar";
 import settings from '@/settings.mjs'
 import { Modal } from "@/components/modal"
 import { MobileBottomMenu } from "@/components/nav/bottom";
+import { BuyTicketAlert } from "@/components/alerts";
 // import { fontFamily } from "tailwindcss/defaultTheme"
 
 
@@ -64,6 +65,9 @@ export default  async function RootLayout({
 <main className="flex-1 mt-12">
   <div className="container">
   
+
+ 
+
   { children }
 
  

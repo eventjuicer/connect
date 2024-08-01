@@ -1,7 +1,11 @@
+"use client"
 
- 
+import { getPayment } from "../payment";
+import { Button } from "@/components/ui/button";
+import { BuyTicketAlert } from "@/components/containers/BuyTicketAlert";
 export default function  Home() {
 
+  const getPaymentM = () => getPayment()
 
   return (
 
@@ -12,6 +16,9 @@ export default function  Home() {
       <div className="h-20">
      
       
+      <BuyTicketAlert />
+
+
       </div>
      
 
