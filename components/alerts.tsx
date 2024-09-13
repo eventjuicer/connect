@@ -13,7 +13,7 @@ import { useTranslate } from '@/lib/contexts'
 //   }
 
 
-export function AlertWithButton({label, secondaryLabel, icon, onClick, buttonLabel}){
+export function AlertWithButton({label, secondaryLabel, icon, onClick, buttonLabel, href}){
 
     const translate = useTranslate()
 
@@ -25,7 +25,7 @@ export function AlertWithButton({label, secondaryLabel, icon, onClick, buttonLab
         <AlertTitle>{translate(label)}</AlertTitle>
         <AlertDescription>{translate(secondaryLabel)}</AlertDescription>
         </div>
-        <div className="mt-4"><Button variant="default" size="default" onClick={onClick}>{translate(buttonLabel)}</Button></div>
+        <div className="mt-4"><Button href={href} variant="default" size="default" onClick={onClick}>{translate(buttonLabel)}</Button></div>
         </div>
         </Alert>
 )

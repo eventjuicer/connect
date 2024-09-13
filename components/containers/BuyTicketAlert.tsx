@@ -1,15 +1,13 @@
+"use client"
 
 import * as React from "react"
 import { Ticket } from "lucide-react"
 import { AlertWithButton } from "../alerts"
+import { getRedirectUrlForPayment } from "@/app/actions"
 
+export  function BuyTicketAlert({url}:{url: string}){
 
-export function BuyTicketAlert(){
-
-
-    const handleClick = React.useCallback(() => {
-    },[])
         
-    return <AlertWithButton icon={<Ticket />} onClick={handleClick} buttonLabel="buy now" />
+    return <AlertWithButton icon={<Ticket />} href={url} buttonLabel="buy now" />
 
 }

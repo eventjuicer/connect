@@ -4,8 +4,15 @@ import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
 import { sendSparkPostEmail } from '@/lib/sparkpost'
 import { redirect } from "next/navigation";
-import { callServiceApi } from "@/lib/api";
+import { callServiceApi, callPaymentApi } from "@/lib/api";
 
+export async function getRedirectUrlForPayment(purchase_ids: string){
+
+  const url = await callPaymentApi("payments", `ids:${purchase_ids}`)
+
+  return url
+
+}
 
 export async function checkToken(){
   return await cookies().get("VISITOR_TOKEN")?.value;

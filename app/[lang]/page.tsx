@@ -1,14 +1,19 @@
-"use client"
+"use server"
 
-import { getPayment } from "../payment";
+// import { getPayment } from "../payment";
 import { Button } from "@/components/ui/button";
 import { BuyTicketAlert } from "@/components/containers/BuyTicketAlert";
-export default function  Home() {
+import { getRedirectUrlForPayment } from "../actions";
+import { auth } from "@/auth"
+export default async function  Home() {
 
-  const getPaymentM = () => getPayment()
+  const session = await auth()
+
+  const url = await getRedirectUrlForPayment("243636,243638")
+
+  if (!session) return <div>Not authenticated</div>
 
   return (
-
 
 
       
@@ -16,7 +21,12 @@ export default function  Home() {
       <div className="h-20">
      
       
-      <BuyTicketAlert />
+    <div>
+    <pre>{JSON.stringify(session, null, 2)}</pre>
+  </div>
+
+  
+      <BuyTicketAlert url={url} />
 
 
       </div>
