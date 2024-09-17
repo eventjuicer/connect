@@ -7,9 +7,8 @@ export async function GET() {
 
   //  const res = await request.json()
 
-    const result = await sendEmailWithToken("adam@zygadlewicz.com")
     
-    return Response.json(result)
+    return Response.json([])
   }
 
 

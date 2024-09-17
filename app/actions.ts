@@ -2,7 +2,6 @@
  
 import { revalidateTag } from 'next/cache'
 import { cookies } from 'next/headers'
-import { sendSparkPostEmail } from '@/lib/sparkpost'
 import { redirect } from "next/navigation";
 import { callServiceApi, callPaymentApi } from "@/lib/api";
 
@@ -67,13 +66,4 @@ export async function getSessionData(req) {
   return encryptedSessionData ? JSON.parse(decrypt(encryptedSessionData)) : null
 }
 
-export async function sendEmailWithToken(to: string){
-  const result = await sendSparkPostEmail({
-    to, 
-    from: `${process.env.SPARKPOST_FROM_EMAIL}`, 
-    subject: "dsa", 
-    message: "asd"
-  });
 
-  return result
-}
