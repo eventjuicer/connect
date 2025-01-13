@@ -60,7 +60,7 @@ export const columns: ColumnDef<Exhibitor>[] = [
    
     {
       id: "name",
-      accessorFn: (row) => row.profile.name,
+      accessorFn: (row) => row.profile.name || "",
       header: "name"
     },
     {
