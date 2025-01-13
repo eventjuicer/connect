@@ -15,7 +15,20 @@ import { cn } from "@/lib/utils"
 
 
 
-function ListItem({href, hrefLang, className, title, children, ...props}){
+function ListItem({
+  href,
+  hrefLang,
+  className,
+  title,
+  children,
+  ...props
+}: {
+  href: string;
+  hrefLang?: string;
+  className?: string;
+  title: string;
+  children: React.ReactNode;
+}) {
 
     return (
         <Link href={href} className={cn(

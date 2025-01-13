@@ -1,6 +1,6 @@
 "use client"
 
-import { useFormState } from "react-dom"
+import { useActionState } from "react"
 import { Input } from "@/components/ui/input"
 import { handleTokenReminder } from "./action"
 import { FormButton } from "@/components/submit"
@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils"
 
 export function ProfileForm() {
     
-  const [state, formAction] = useFormState(handleTokenReminder, {})
+  const [state, formAction] = useActionState(handleTokenReminder, {})
 
   return (
     

@@ -12,13 +12,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, user }) {
 
       try {
-        const response = await fetch(`https://api.eventjuicer.com/v1/public/hosts/targiehandlu.pl/connect/${user.email}`)
+        const response = await fetch(`https://api.eventjuicer.com/v1/connect/hosts/targiehandlu.pl/connect/${user.email}`)
 
         const tokensOrError = await response.json()
         if (!response.ok) throw tokensOrError
-  
 
-        console.log(tokensOrError)
+        session.user.is_vip = tokensOrError?.data?.some(item => item.important===1)
+        session.user.is_presenter = tokensOrError?.data?.some(item => item.roles.includes("presenter"))
+        session.user.is_exhibitor = tokensOrError?.data?.some(item => item.roles.includes("exhibitor")) || tokensOrError?.data?.some(item => item.roles.includes("representative"))
+        session.user.is_visitor = tokensOrError?.data?.some(item => item.roles.includes("visitor"))
+        session.user.lang = tokensOrError?.data[0]?.lang
+        session.user.valid =  session.user.is_presenter || session.user.is_exhibitor || session.user.is_visitor
+        session.user.company_id = tokensOrError?.data?.find(item => item.company_id>0)?.company_id || 0
+
 
         session.user.id = user.id
         return session
@@ -53,18 +59,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     user: {
       id: '10aaa098-....a4953e1d519',
       name: 'Adam Zygadlewicz',
-      email: 'adam@zygadlewicz.com',
+      email: 'adamssssewicz.com',
       emailVerified: 2024-09-16T16:33:00.321Z,
       image: 'https://media.licdn.com/dms/image/v2/C5603AQEK3vjvDioFYg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516241692527?e=2147483647&v=beta&t=tL6Qs-JP4yKIFu5dI8JtOt_KnAwWBQ_-9HQ4fu1G55I'
     }
   },
-  user: {
-    id: '10aaa09...3a4953e1d519',
-    name: 'Adam Zygadlewicz',
-    email: 'adam@xxxx.com',
-    emailVerified: 2024-09-16T16:33:00.321Z,
-    image: 'https://media.licdn.com/dms/image/v2/C5603AQEK3vjvDioFYg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516241692527?e=2147483647&v=beta&t=tL6Qs-JP4yKIFu5dI8JtOt_KnAwWBQ_-9HQ4fu1G55I'
-  }
+  
     }
 
  */

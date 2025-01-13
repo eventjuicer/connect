@@ -27,14 +27,19 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default  async function RootLayout({
-  children, params: {lang}
+export default async function RootLayout({
+  children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
   params: {lang: string};
 }>) {
-
-  const locale = cookies().get("NEXT_LOCALE")?.value || lang
+  // First await the params
+  const { lang } = await params
+  
+  // Then await cookies
+  const cookieStore = await cookies()
+  const locale = cookieStore.get("NEXT_LOCALE")?.value || lang
 
   const translations = await loadTranslations()
 
