@@ -4,9 +4,12 @@ import React from 'react'
 import {TranslatableSelect} from '@/components/selects'
 import { getSettings } from '@/lib/settings'
 import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
+
 type FilterByKeywordsProps = {
     setting?: string;
     column: string;
+    initialValue?: string;
     onValueChange?: (val: string) => void
 }
 
@@ -23,16 +26,53 @@ const defaultProps = {
     ]
 }
 
-export function FilterByKeywords({setting="company.tags", column="", onValueChange}: FilterByKeywordsProps){
-
+export function FilterByKeywords({
+    setting="company.tags", 
+    column="", 
+    initialValue="",
+    onValueChange
+}: FilterByKeywordsProps) {
+    const router = useRouter()
     const searchParams = useSearchParams()
 
-    const cat = searchParams.get("category");
+    const [selectedValue, setSelectedValue] = React.useState<string>(
+        initialValue || searchParams.get(column) || ""
+    )
 
-    console.log({searchParams, cat})
+    // Trigger initial filter only once when component mounts
+    React.useEffect(() => {
+        const urlValue = searchParams.get(column)
+        if (urlValue && onValueChange) {
+            onValueChange(urlValue)
+        }
+    }, []) // Empty dependency array to run only once
+
+    const handleValueChange = (value: string) => {
+        setSelectedValue(value)
+        
+        const newSearchParams = new URLSearchParams(searchParams.toString())
+        
+        if (value) {
+            newSearchParams.set(column, value)
+        } else {
+            newSearchParams.delete(column)
+        }
+        
+        router.push(`?${newSearchParams.toString()}`)
+        
+        if (onValueChange) {
+            onValueChange(value)
+        }
+    }
 
     const props = Object.assign({}, defaultProps, getSettings(setting))
 
-    return (<TranslatableSelect {...props} value={cat} onValueChange={onValueChange} />)
+    return (
+        <TranslatableSelect 
+            {...props} 
+            value={selectedValue}
+            onValueChange={handleValueChange}
+        />
+    )
 }
 
