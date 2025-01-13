@@ -1,5 +1,21 @@
 
 
+export type Visitor = {
+  id: number;
+  fname: string;
+  lname: string;
+  domain: string;
+  avatar: string;
+}
+
+
+
+export type Presenter = {
+    id: number;
+    fname: string;
+    lname: string;
+    domain: string;
+}
 
 
 export type ExhibitorProfile = {
