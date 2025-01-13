@@ -9,7 +9,9 @@ export  async function GET(
   ) {
 
   const goto = request.nextUrl.searchParams.get("goto")
-  const {token} = params
+  const cookieStore = await cookies()
+  const paramStore = await params
+  const {token} = paramStore
 
 
   if(!token || token.length < 32){
@@ -18,11 +20,13 @@ export  async function GET(
 
   const data = await callServiceApi("token", {token})
 
+  console.log({data})
+
   if(data){
-    cookies().set("VISITOR_TOKEN", token)
+    cookieStore.set("VISITOR_TOKEN", token)
     return goto && goto.charAt(0)==="/"? redirect(goto): redirect("/profile")
   }else{
-    cookies().delete("VISITOR_TOKEN")
+    cookieStore.delete("VISITOR_TOKEN")
     redirect("/login")
   }
 
