@@ -9,7 +9,7 @@
     "lint": "next lint",
     "shadcn": "for file in components/ui/*.tsx; do npx shadcn@latest add -y -o $(basename $file .tsx); done",
     "update-kysely-types": "env-cmd -f .env.local kysely-codegen --dialect=postgres --out-file ./db/kysely-types.ts --exclude-pattern spatial_ref_sys",
-    "migrate": "tsx scripts/migrate.ts"
+    "migrate": "env-cmd -f .env.local tsx scripts/migrate.ts"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.10",
@@ -51,6 +51,7 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^1.1.2",
     "vimeo": "^2.3.1",
+    "ws": "^8.18.0",
     "zod": "^3.24.1",
     "zustand": "^5.0.3"
   },

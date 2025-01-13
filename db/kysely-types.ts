@@ -55,10 +55,20 @@ export interface VerificationToken {
   token: string;
 }
 
+export interface Poke {
+  id: number;
+  user_id: Generated<string>;
+  poked_id: number;
+  status: number;
+  created_at: Date;
+  edited_at: Date;
+}
+
 export interface DB {
   Account: Account;
   migrations: Migrations;
   Session: Session;
   User: User;
   VerificationToken: VerificationToken;
+  Poke: Poke;
 }

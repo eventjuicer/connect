@@ -3,7 +3,7 @@ import { Kysely, sql } from 'kysely'
 export async function up(db: Kysely<any>): Promise<void> {
   await db.schema
     .createTable('Poke')
-    .addColumn('id', 'serial', (col) => col.primaryKey().autoIncrement())
+    .addColumn('id', 'serial', (col) => col.primaryKey())
     .addColumn('user_id', 'uuid', (col) => 
       col.references("User.id").onDelete("cascade").notNull()
     )

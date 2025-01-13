@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button"
 import { Bell } from "lucide-react"
 import { ShowDetails } from "./buttons"
 import { Visitor } from "@/app/[lang]/expo/types"
+import { PokeButton } from "./poke-button"
+import { auth } from "@/auth"
+import { getPokedUsers } from "./actions"
 
 
 async function getVisitors() {
@@ -14,7 +17,14 @@ async function getVisitors() {
 
 export default async function Visitors() {
   const visitors = await getVisitors()
-
+  const session = await auth()
+  
+  // Get list of already poked users if user is authenticated
+  const pokedUsers = session?.user?.id 
+    ? await getPokedUsers(session.user.id)
+    : []
+  
+  const pokedIds = new Set(pokedUsers.map(p => p.poked_id))
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
@@ -33,19 +43,22 @@ export default async function Visitors() {
                 <p className="text-sm text-muted-foreground">{visitor.domain}</p>
               </div>
 
-              <Button variant="ghost" size="sm" className="gap-2">
-                <Bell className="h-4 w-4" />
-                Poke
-              </Button>
+              {session?.user && (
+                pokedIds.has(visitor.id) ? (
+                  <Button variant="ghost" size="sm" className="gap-2" disabled>
+                    <Bell className="h-4 w-4" />
+                    Poked
+                  </Button>
+                ) : (
+                  <PokeButton visitorId={visitor.id} />
+                )
+              )}
             </div>
 
             <div className="flex justify-end">
               <ShowDetails visitor={visitor} />
             </div>
-
           </CardContent>
-
-
         </Card>
       ))}
     </div>

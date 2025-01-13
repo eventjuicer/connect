@@ -17,33 +17,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       try {
         const response = await fetch(`https://api.eventjuicer.com/v1/connect/hosts/targiehandlu.pl/connect/${user.email}`)
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-        }
 
-        const contentType = response.headers.get("content-type")
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new Error("Response is not JSON")
-        }
+        console.log({response})
 
-        const json = await response.json().catch(error => {
-          throw new Error("Failed to parse JSON: " + error.message)
-        })
+        // if (!response.ok) {
+        //   throw new Error(`HTTP error! status: ${response.status}`)
+        // }
 
-        if (!json || !("data" in json)) {
-          throw new Error("Bad JSON response")
-        }
+        // const contentType = response.headers.get("content-type")
+        // if (!contentType || !contentType.includes("application/json")) {
+        //   throw new Error("Response is not JSON")
+        // }
 
-        session.user.is_vip = json.data?.some(item => item.important===1)
-        session.user.is_presenter = json.data?.some(item => item.roles.includes("presenter"))
-        session.user.is_exhibitor = json.data?.some(item => item.roles.includes("exhibitor")) || json.data?.some(item => item.roles.includes("representative"))
-          session.user.is_visitor = json.data?.some(item => item.roles.includes("visitor"))
-        session.user.lang = json.data[0]?.lang
-        session.user.valid =  session.user.is_presenter || session.user.is_exhibitor || session.user.is_visitor
-        session.user.company_id = json.data?.find(item => item.company_id>0)?.company_id || 0
+        // const json = await response.json().catch(error => {
+        //   throw new Error("Failed to parse JSON: " + error.message)
+        // })
+
+        // if (!json || !("data" in json)) {
+        //   throw new Error("Bad JSON response")
+        // }
+
+        // session.user.is_vip = json.data?.some(item => item.important===1)
+        // session.user.is_presenter = json.data?.some(item => item.roles.includes("presenter"))
+        // session.user.is_exhibitor = json.data?.some(item => item.roles.includes("exhibitor")) || json.data?.some(item => item.roles.includes("representative"))
+        //   session.user.is_visitor = json.data?.some(item => item.roles.includes("visitor"))
+        // session.user.lang = json.data[0]?.lang
+        // session.user.valid =  session.user.is_presenter || session.user.is_exhibitor || session.user.is_visitor
+        // session.user.company_id = json.data?.find(item => item.company_id>0)?.company_id || 0
 
 
-        session.user.id = user.id
+        // session.user.id = user.id
         return session
 
 
